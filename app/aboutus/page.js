@@ -112,7 +112,7 @@ export default function AboutUs() {
             </div>
             <div className="flex items-center justify-center gap-20 pt-10 mb-20">
               <div className="w-28 h-[2px] bg-blue-700"></div>
-              <h1 className="text-5xl font-bold">Our KW&SC Story</h1>
+              <h1 className="text-5xl font-bold">KW&SC Heritage</h1>
               <div className="w-28 h-[2px] bg-blue-700"></div>
             </div>
             <div className="flex">

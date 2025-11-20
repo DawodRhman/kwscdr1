@@ -7,6 +7,8 @@ import Counter from "@/components/Counter";
 // import Slider from "@/components/Slider";
 import Subscribe from "@/components/Subscribe";
 import KWSCMap from "@/components/Kwscmap";
+import NewsUpdate from "@/components/NewsUpdate";
+import Projects from "@/components/Projects";
 export default function Home() {
  
 
@@ -14,12 +16,15 @@ export default function Home() {
     <>
       <Main/>
       {/* <Slider /> */}
-      <Whoarewe />
-      <Services/>
+     
+      <Services />
+      <NewsUpdate />
+      <Projects />
       <WorkFlow />
+      <KWSCMap />
       <Counter />
       <Subscribe />
-     <KWSCMap />
+     
     </>
   );
 }

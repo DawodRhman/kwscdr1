@@ -760,7 +760,7 @@ export default function Services() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div>  
       </div>
     </>
   );
