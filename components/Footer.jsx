@@ -1,8 +1,16 @@
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { CopyRight } from "@/components/SocialLinks";
-import { Mail, MapPin, Phone } from "lucide-react";
+// FIX: Using standard 'a' tags for links as 'next/link' is unresolved
+// FIX: Using standard 'img' tag as 'next/image' is unresolved
+import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Youtube, ExternalLink } from "lucide-react";
+
+// Social media data for KW&SC
+const social_links = [
+  // Adjusted colors for contrast on a light background
+  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/kwscofficial", color: "text-blue-700 hover:text-blue-500" },
+  { name: "Twitter", icon: Twitter, href: "https://twitter.com/kwscofficial", color: "text-sky-600 hover:text-sky-400" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/kwsc", color: "text-blue-800 hover:text-blue-600" },
+  { name: "YouTube", icon: Youtube, href: "https://www.youtube.com/@kwscofficial", color: "text-red-700 hover:text-red-500" },
+];
 
 const footer_data = {
   email: "info@kwsc.gos.pk",
@@ -12,129 +20,138 @@ const footer_data = {
     "Karachi Water and Sewerage Corporation (KW&SC) is committed to providing reliable water and sewerage services to Karachi, ensuring clean water and efficient sewerage management for all residents.",
 };
 
+// Placeholder for the CopyRight component as it wasn't provided
+const CopyRight = () => (
+    <p className="text-gray-500 text-sm">
+        &copy; {new Date().getFullYear()} KW&SC. All Rights Reserved.
+    </p>
+);
+
 const Footer = () => {
   return (
-    <>
-    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white mt-20 pt-14 font-bold relative">
-      <div className="h-36 md:h-16"></div>
-      <div className=" max-w-[1320px] mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {/* Company Info */}
+    // Switched to a light background color and dark text color
+    <footer className="bg-gray-50 text-gray-700 pt-20 font-sans relative overflow-hidden shadow-lg">
+      {/* Abstract wave or shape for visual interest - now a lighter accent border */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600"></div>
+
+      <div className=" max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* 1. Company Info & Logo */}
           <div className="lg:col-span-1">
-            <div className="mb-10">
-              <Image
+            <div className="mb-8">
+              {/* Using standard <img> tag */}
+              <img
                 src={"/kwsc logo.png"}
                 width={150}
                 height={150}
                 alt="KW&SC Logo"
-                className="mb-6"
+                className="mb-6 object-contain h-24 w-auto"
               />
-              <p className="mb-6 text-lg leading-relaxed">{footer_data.footer_info}</p>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <MapPin className="text-blue-400" size={20} />
-                  <span className="text-sm">{footer_data.location}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="text-blue-400" size={20} />
-                  <span className="text-sm">{footer_data.phone}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="text-blue-400" size={20} />
-                  <span className="text-sm">{footer_data.email}</span>
-                </div>
+              <p className="mb-6 text-gray-600 leading-relaxed text-base">
+                {footer_data.footer_info}
+              </p>
+            </div>
+          </div>
+
+          {/* 2. Contact Information */}
+          <div className="lg:col-span-1">
+            {/* Updated title color and border accent for light theme */}
+            <h3 className="text-xl font-extrabold text-blue-600 mb-6 border-l-4 border-cyan-500 pl-3">Get In Touch</h3>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="text-cyan-500 mt-1 flex-shrink-0" size={20} />
+                <span className="text-sm text-gray-600 hover:text-cyan-600 transition-colors">
+                    {footer_data.location}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="text-cyan-500 flex-shrink-0" size={20} />
+                <a href={`tel:${footer_data.phone.replace(/[\s\(\)]/g, '')}`} className="text-sm text-gray-600 hover:text-cyan-600 transition-colors">
+                    {footer_data.phone}
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="text-cyan-500 flex-shrink-0" size={20} />
+                <a href={`mailto:${footer_data.email}`} className="text-sm text-gray-600 hover:text-cyan-600 transition-colors">
+                    {footer_data.email}
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* 3. Quick Links (Simplified) */}
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-6">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <Link href="/aboutus" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                About Us
-              </Link>
-              <Link href="/ourservices" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                What We Do
-              </Link>
-              <Link href="/portfolio" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                Our Projects
-              </Link>
-              <Link href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                Contact Us
-              </Link>
+            {/* Updated title color and border accent for light theme */}
+            <h3 className="text-xl font-extrabold text-blue-600 mb-6 border-l-4 border-cyan-500 pl-3">Quick Navigation</h3>
+            <div className="space-y-3">
+              {/* Using standard <a> tag */}
+              {[
+                { label: "About Us", href: "/aboutus" },
+                { label: "What We Do", href: "/ourservices" },
+                { label: "Our Projects", href: "/portfolio" },
+                { label: "Careers", href: "/careers" },
+                { label: "News & Updates", href: "/news" },
+                { label: "Contact Us", href: "/contact" },
+              ].map((item, index) => (
+                <a key={index} href={item.href} className="block text-gray-600 hover:text-blue-600 transition-colors text-base font-medium group">
+                    <span className="group-hover:translate-x-1 transition-transform inline-block text-cyan-500">→</span> {item.label}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Additional Services */}
+          {/* 4. Social Media & External Resources */}
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-6">Services & Information</h3>
-            <div className="space-y-3">
-              <Link href="/achievements" className="block text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                Achievements
-              </Link>
-              <Link href="/careers" className="block text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                Careers
-              </Link>
-              <Link href="/right-to-information" className="block text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                Right to Information
-              </Link>
-              <Link href="/news" className="block text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                News & Updates
-              </Link>
-              <Link href="/faqs" className="block text-gray-300 hover:text-blue-400 transition-colors text-sm">
-                FAQs
-              </Link>
+            {/* Updated title color and border accent for light theme */}
+            <h3 className="text-xl font-extrabold text-blue-600 mb-6 border-l-4 border-cyan-500 pl-3">Stay Connected</h3>
+            
+            {/* Social Icons Section - Adjusted background/border for light theme */}
+            <div className="flex space-x-4 mb-8">
+              {social_links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                  className={`p-3 rounded-full bg-white transition-all duration-300 border border-gray-300 hover:bg-gray-100 ${link.color}`}
+                >
+                  <link.icon size={24} />
+                </a>
+              ))}
             </div>
+
+            {/* External Links */}
+            <h4 className="text-lg font-bold text-gray-600 mb-4">Official Portals</h4>
+            <div className="space-y-3">
+                {[
+                    { label: "Online Complaint System", href: "https://complain.kwsc.gos.pk" },
+                    { label: "Tanker Booking System", href: "https://campaign.kwsc.gos.pk/" },
+                    { label: "Sindh Government Portal", href: "https://www.sindh.gov.pk/" },
+                ].map((item, index) => (
+                    <a
+                        key={index}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-gray-500 hover:text-blue-600 transition-colors text-sm font-medium flex items-center gap-2"
+                    >
+                        {item.label} <ExternalLink size={14} className="flex-shrink-0" />
+                    </a>
+                ))}
+            </div>
+
           </div>
+
         </div>
 
-        {/* External Resources */}
-        <div className="bg-blue-800/50 rounded-lg p-6 mb-8">
-          <h3 className="text-xl font-bold text-white mb-4 text-center">External Resources</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a
-              href="https://www.sindh.gov.pk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-blue-400 transition-colors text-center text-sm"
-            >
-              Sindh Government Portal
-            </a>
-            <a
-              href="https://web.kwsb.crdc.biz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-blue-400 transition-colors text-center text-sm"
-            >
-              KWSB CRDC Portal
-            </a>
-            <a
-              href="https://complain.kwsc.gos.pk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-blue-400 transition-colors text-center text-sm"
-            >
-              Online Complaint System
-            </a>
-            <a
-              href="https://campaign.kwsc.gos.pk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-blue-400 transition-colors text-center text-sm"
-            >
-              Tanker Booking System
-              </a>
-            </div>
-          </div>
-            </div>
-      <div className="border-t border-blue-700 py-8 text-center text-md">
-        <div className="mx-auto">
+        {/* Copyright and Bottom Border - Adjusted border color */}
+        <div className="border-t border-gray-200 py-8 text-center">
           <CopyRight />
         </div>
       </div>
     </footer>
-    </>
   );
 };
 

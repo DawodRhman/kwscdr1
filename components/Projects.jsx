@@ -1,19 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { 
-  Waves, 
-  Zap, 
-  Droplet, 
-  Cpu, 
-  HardHat, 
-  TrendingUp, 
-  Clock, 
-  CheckCircle,
-  Activity
+    Waves, 
+    Zap, 
+    Droplet, 
+    Cpu, 
+    HardHat, 
+    TrendingUp, 
+    Clock, 
+    CheckCircle,
+    Activity
 } from "lucide-react";
 
 // --- Mock Data derived from KW&SC Projects Page (PSDP/ADP Schemes) ---
-// Note: The 'cost' field has been removed from all project objects.
 const projectsData = [
     {
         id: "PSDP-1",
@@ -24,7 +23,7 @@ const projectsData = [
         scope: "Add 260 MGD of water to the Karachi system. Includes components like bulk water conveyance, pumping stations, and distribution network improvements.",
         icon: <Waves />,
         color: "cyan",
-        image: "https://placehold.co/800x450/0f172a/06b6d4?text=K-IV+COMPLETION"
+        image: "https://placehold.co/800x450/e0f7fa/0891b2?text=K-IV+COMPLETION"
     },
     {
         id: "PSDP-2",
@@ -35,7 +34,7 @@ const projectsData = [
         scope: "Rehabilitation and upgrade of pumping machinery at Dhabeji to ensure optimal transmission capacity and reduce downtime.",
         icon: <Zap />,
         color: "yellow",
-        image: "https://placehold.co/800x450/0f172a/facc15?text=DHABEJI+UPGRADE"
+        image: "https://placehold.co/800x450/fffbe5/d97706?text=DHABEJI+UPGRADE"
     },
     {
         id: "ADP-1",
@@ -46,7 +45,7 @@ const projectsData = [
         scope: "Replacement of old and damaged sewage lines and construction of new disposal structures in District East.",
         icon: <Droplet />,
         color: "blue",
-        image: "https://placehold.co/800x450/0f172a/3b82f6?text=SEWERAGE+REHAB"
+        image: "https://placehold.co/800x450/eff6ff/1d4ed8?text=SEWERAGE+REHAB"
     },
     {
         id: "ADP-2",
@@ -57,7 +56,7 @@ const projectsData = [
         scope: "Develop a centralized digital system for managing tanker requests, tracking, and billing to enhance transparency and efficiency.",
         icon: <Cpu />,
         color: "purple",
-        image: "https://placehold.co/800x450/0f172a/a855f7?text=DIGITIZATION+PLAN"
+        image: "https://placehold.co/800x450/f5f3ff/7c3aed?text=DIGITIZATION+PLAN"
     },
     {
         id: "ADP-3",
@@ -68,63 +67,65 @@ const projectsData = [
         scope: "Construction of a new bulk water line to connect Gadani to the main KW&SC network.",
         icon: <HardHat />,
         color: "red",
-        image: "https://placehold.co/800x450/0f172a/ef4444?text=GADANI+SCHEME"
+        image: "https://placehold.co/800x450/fef2f2/dc2626?text=GADANI+SCHEME"
     }
 ];
 
+// Reusable component for a single project card
 const ProjectCard = ({ project, index }) => {
-    const [isHovered, setIsHovered] = useState(false);
     
     // Define dynamic Tailwind classes based on project color and status
+    // Using darker borders and text for the light theme
     const colorClasses = {
-        cyan: { border: 'border-cyan-500/50', shadow: 'shadow-cyan-400/20', text: 'text-cyan-400', bg: 'bg-cyan-950/30', progress: 'bg-cyan-500' },
-        yellow: { border: 'border-yellow-500/50', shadow: 'shadow-yellow-400/20', text: 'text-yellow-400', bg: 'bg-yellow-950/30', progress: 'bg-yellow-500' },
-        blue: { border: 'border-blue-500/50', shadow: 'shadow-blue-400/20', text: 'text-blue-400', bg: 'bg-blue-950/30', progress: 'bg-blue-500' },
-        purple: { border: 'border-purple-500/50', shadow: 'shadow-purple-400/20', text: 'text-purple-400', bg: 'bg-purple-950/30', progress: 'bg-purple-500' },
-        red: { border: 'border-red-500/50', shadow: 'shadow-red-400/20', text: 'text-red-400', bg: 'bg-red-950/30', progress: 'bg-red-500' },
+        cyan: { border: 'border-cyan-300', shadow: 'shadow-cyan-200', text: 'text-cyan-600', bg: 'bg-cyan-50', progress: 'bg-cyan-500' },
+        yellow: { border: 'border-yellow-300', shadow: 'shadow-yellow-200', text: 'text-yellow-600', bg: 'bg-yellow-50', progress: 'bg-yellow-500' },
+        blue: { border: 'border-blue-300', shadow: 'shadow-blue-200', text: 'text-blue-600', bg: 'bg-blue-50', progress: 'bg-blue-500' },
+        purple: { border: 'border-purple-300', shadow: 'shadow-purple-200', text: 'text-purple-600', bg: 'bg-purple-50', progress: 'bg-purple-500' },
+        red: { border: 'border-red-300', shadow: 'shadow-red-200', text: 'text-red-600', bg: 'bg-red-50', progress: 'bg-red-500' },
     };
     
+    // Status badges using light theme colors
     const statusBadges = {
-        'COMPLETED': 'bg-emerald-600/70 border-emerald-400/50',
-        'ONGOING': 'bg-yellow-600/70 border-yellow-400/50',
-        'PLANNING': 'bg-purple-600/70 border-purple-400/50',
-        'PAUSED': 'bg-red-600/70 border-red-400/50',
+        'COMPLETED': 'bg-emerald-500 text-white',
+        'ONGOING': 'bg-yellow-500 text-white',
+        'PLANNING': 'bg-purple-500 text-white',
+        'PAUSED': 'bg-red-500 text-white',
     };
 
     const currentClasses = colorClasses[project.color] || colorClasses.cyan;
-    const currentStatusBadge = statusBadges[project.status] || 'bg-slate-600/70 border-slate-400/50';
+    const currentStatusBadge = statusBadges[project.status] || 'bg-gray-500 text-white';
 
     return (
         <div 
-            className={`relative bg-slate-900/60 backdrop-blur-xl rounded-2xl overflow-hidden border ${currentClasses.border} transition-all duration-500 flex flex-col h-full cursor-pointer hover:shadow-[0_0_30px_-5px_rgba(6,182,212,0.3)]`}
+            className={`relative bg-white rounded-xl overflow-hidden border ${currentClasses.border} shadow-lg transition-all duration-500 flex flex-col h-full cursor-pointer hover:shadow-xl hover:-translate-y-1`}
             style={{
                 animation: `fadeInUp 0.6s ease-out forwards`,
                 animationDelay: `${index * 0.15}s`,
                 opacity: 0,
                 transform: 'translateY(20px)',
             }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
         >
             {/* Image & Header */}
             <div className="relative h-48 overflow-hidden">
                 <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                    // Darkening image on hover slightly for light theme
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 opacity-90"
+                    onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/800x450/f0f0f0/6b7280?text=Image+Unavailable" }}
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0 bg-black/10"></div> {/* Soft overlay */}
 
                 {/* Status Badge */}
-                <div className="absolute top-3 right-3 z-10">
-                    <span className={`px-3 py-1 text-xs font-bold text-white uppercase rounded border ${currentStatusBadge}`}>
+                <div className="absolute top-4 right-4 z-10">
+                    <span className={`px-3 py-1 text-xs font-bold uppercase rounded-full ${currentStatusBadge} shadow`}>
                         {project.status}
                     </span>
                 </div>
                 
                 {/* Category Badge */}
-                <div className="absolute bottom-3 left-3 z-10">
-                    <span className={`px-3 py-1 text-xs font-mono uppercase rounded ${currentClasses.bg} border ${currentClasses.border} ${currentClasses.text} backdrop-blur-sm`}>
+                <div className="absolute bottom-4 left-4 z-10">
+                    <span className={`px-3 py-1 text-xs font-mono uppercase rounded-full border ${currentClasses.border} ${currentClasses.bg} ${currentClasses.text}`}>
                         {project.category}
                     </span>
                 </div>
@@ -132,34 +133,33 @@ const ProjectCard = ({ project, index }) => {
 
             {/* Content Body */}
             <div className="p-6 flex flex-col flex-grow relative">
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
+                
                 <div className="flex items-center gap-3 mb-3">
-                    <div className={`${currentClasses.text}`}>
+                    <div className={`text-2xl ${currentClasses.text}`}>
                         {project.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-white leading-snug line-clamp-2">
+                    <h3 className="text-xl font-extrabold text-gray-900 leading-snug line-clamp-2">
                         {project.title}
                     </h3>
                 </div>
 
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
+                <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
                     {project.scope}
                 </p>
 
-                {/* Project Metrics (Only Physical Progress remains) */}
-                <div className="mt-auto pt-4 border-t border-white/5 space-y-3">
+                {/* Project Metrics (Physical Progress) */}
+                <div className="mt-auto pt-4 border-t border-gray-100 space-y-3">
                     
-                    <div className="flex items-center justify-between text-slate-300 text-sm">
-                        <div className="flex items-center gap-2 text-emerald-400">
+                    <div className="flex items-center justify-between text-gray-700 text-sm">
+                        <div className="flex items-center gap-2 text-green-600 font-semibold">
                             <TrendingUp className="w-4 h-4" />
                             <span>Physical Progress:</span>
                         </div>
-                        <span className="font-bold text-white">{project.progress}%</span>
+                        <span className="font-bold text-gray-900">{project.progress}%</span>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-slate-800 rounded-full h-2 mt-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                         <div 
                             className={`h-2 rounded-full transition-all duration-1000 ${currentClasses.progress}`}
                             style={{ width: `${project.progress}%` }}
@@ -169,8 +169,8 @@ const ProjectCard = ({ project, index }) => {
             </div>
             
             {/* Footer Link */}
-            <div className={`p-4 border-t border-white/5 flex justify-end`}>
-                <a href={`#project-${project.id}`} className={`flex items-center gap-1 text-sm font-bold ${currentClasses.text} hover:opacity-80 transition-colors group/link`}>
+            <div className="p-4 border-t border-gray-100 flex justify-end">
+                <a href={`#project-${project.id}`} className={`flex items-center gap-1 text-sm font-bold ${currentClasses.text} hover:text-opacity-80 transition-colors group/link`}>
                     VIEW DETAILS
                     <CheckCircle className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                 </a>
@@ -192,14 +192,6 @@ export default function Projects() {
                 from { opacity: 0; transform: translateY(30px); }
                 to { opacity: 1; transform: translateY(0); }
             }
-            /* Add the futuristic grid background CSS from page.js or NewsUpdates.jsx */
-            .tech-grid-bg {
-                background-image: 
-                  linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
-                background-size: 40px 40px;
-                mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-              }
         `;
         document.head.appendChild(style);
 
@@ -216,32 +208,32 @@ export default function Projects() {
     }, []);
 
     return (
-        <section className="min-h-screen bg-[#020617] py-20 relative overflow-hidden font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+        // Main container uses a light background
+        <section className="min-h-screen bg-gray-50 py-24 relative overflow-hidden font-sans selection:bg-blue-100 selection:text-gray-800">
             
-            {/* --- FUTURISTIC BACKGROUND ELEMENTS --- */}
-            
-            {/* 1. Grid Background Overlay */}
-            <div className="absolute inset-0 tech-grid-bg opacity-10 pointer-events-none"></div>
-            
-            {/* 2. Glowing Nebula Effects */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-50"></div>
-            <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen opacity-50"></div>
+            {/* --- Subtle Background Elements (Retained for depth) --- */}
+            {/* Soft, light gradient glow */}
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-100/50 rounded-full blur-[100px] pointer-events-none mix-blend-multiply opacity-30"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-100/50 rounded-full blur-[100px] pointer-events-none mix-blend-multiply opacity-30"></div>
+            <div className="absolute inset-0 bg-white/50 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] pointer-events-none"></div>
 
-            {/* 3. Content Container */}
+            {/* Content Container */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
                 
                 {/* Header */}
                 <div className="text-center mb-20">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-6">
-                        <Activity className="w-3 h-3 animate-pulse" />
+                    {/* Light Theme Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-sm font-semibold mb-6 shadow-sm">
+                        <Activity className="w-4 h-4 animate-pulse" />
                         <span>INFRASTRUCTURE DEPLOYMENT STATUS</span>
                     </div>
                     
-                    <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-cyan-200 drop-shadow-[0_0_15px_rgba(6,182,212,0.3)] tracking-tight mb-6">
-                        MAJOR <span className="text-cyan-400">PROJECTS</span>
+                    {/* Light Theme Heading */}
+                    <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-6">
+                        MAJOR <span className="text-blue-600">PROJECTS</span>
                     </h1>
                     
-                    <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+                    <p className="max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
                         Tracking the physical and financial progress of Federal (PSDP) and Provincial (ADP) development schemes.
                     </p>
                 </div>
@@ -250,12 +242,13 @@ export default function Projects() {
                 {loading ? (
                     <div className="flex flex-col justify-center items-center h-80">
                         <div className="relative">
-                            <div className="w-16 h-16 border-4 border-cyan-500/30 border-t-cyan-400 rounded-full animate-spin"></div>
+                            {/* Loading spinner uses a darker border for visibility */}
+                            <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+                                <div className="w-2 h-2 bg-blue-500 rounded-full animate-ping"></div>
                             </div>
                         </div>
-                        <p className="mt-6 text-cyan-500 font-mono text-sm tracking-widest animate-pulse">AWAITING PROJECT DATA...</p>
+                        <p className="mt-6 text-blue-600 font-medium text-base tracking-wider animate-pulse">LOADING PROJECT DATA...</p>
                     </div>
                 ) : (
                     /* Projects Grid */
@@ -272,12 +265,12 @@ export default function Projects() {
                         href="https://www.kwsc.gos.pk/our-projects"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center justify-center px-8 py-4 bg-slate-900 overflow-hidden rounded-lg border border-cyan-500/50 text-white font-bold uppercase tracking-wider hover:border-cyan-400 transition-all duration-300"
+                        className="group relative inline-flex items-center justify-center px-10 py-4 bg-white overflow-hidden rounded-full border border-blue-400 text-blue-600 font-bold uppercase tracking-wider hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
-                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-cyan-500 rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-blue-500 rounded-full group-hover:w-full group-hover:h-full opacity-10"></span>
                         <span className="relative flex items-center gap-3">
                             View Historical Project Archives
-                            <Clock className="w-5 h-5 group-hover:animate-bounce" />
+                            <Clock className="w-5 h-5 transition-transform group-hover:rotate-12" />
                         </span>
                     </a>
                 </div>

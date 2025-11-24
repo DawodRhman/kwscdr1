@@ -9,6 +9,8 @@ import Subscribe from "@/components/Subscribe";
 import KWSCMap from "@/components/Kwscmap";
 import NewsUpdate from "@/components/NewsUpdate";
 import Projects from "@/components/Projects";
+import MediaGallery from "@/components/MediaGallery";
+
 export default function Home() {
  
 
@@ -20,10 +22,12 @@ export default function Home() {
       <Services />
       <NewsUpdate />
       <Projects />
-      <WorkFlow />
+      
       <KWSCMap />
+      <WorkFlow />
       <Counter />
-      <Subscribe />
+      <MediaGallery />
+      
      
     </>
   );

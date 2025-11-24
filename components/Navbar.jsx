@@ -53,11 +53,12 @@ const Navbar = () => {
     { href: "/", text: "Home" },
    
     { 
-      href: "/ourservices", 
+      href: "/whatwedo", 
       text: "What We Do",
       submenu: [
         { href: "/ourservices", text: "Our Services" },
         { href: "/portfolio", text: "Our Projects" },
+        { href: "/workwithus", text: "Work With Us" },
         { href: "/news", text: "News & Updates" },
         { href: "/right-to-information", text: "Right to Information" },
       ]
@@ -67,7 +68,7 @@ const Navbar = () => {
       text: "About Us",
       submenu: [
         { href: "/aboutus", text: "Our Heritage" },
-        { href: "/watertoday", text: "Water Today" },
+        { href: "/watertodaysection", text: "Water Today" },
         { href: "/achievements", text: "Achievements" },
         { href: "/ourleadership", text: "Our Leadership" },
         { href: "/careers", text: "Careers" },

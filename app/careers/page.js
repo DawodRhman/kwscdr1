@@ -29,7 +29,7 @@ export default function Careers() {
       title: "Young Graduate Program",
       description: "Launch your career with KW&SC's comprehensive graduate program designed for fresh, talented engineers and professionals.",
       features: [
-        "12-month structured program",
+        "A structured program",
         "Mentorship from senior professionals",
         "Hands-on project experience",
         "Training and skill development",
@@ -118,8 +118,9 @@ export default function Careers() {
       {loading && <Loader />}
       
       {/* 1. Enhanced Hero Section */}
-      <section className={`relative h-[60vh] md:h-screen transition-opacity duration-700 bg-[url('/teentalwarkarachi.gif')] bg-cover bg-center text-white flex justify-center items-center`}>
-        <div className="absolute inset-0 bg-blue-900/80 z-0 backdrop-blur-sm"></div>
+       <section  className={`relative h-[15vh] md:h-[70vh] transition-opacity duration-700 bg-[url('/teentalwarkarachi.gif')] bg-cover bg-center text-white flex justify-center items-center`}
+>
+  <div className="absolute inset-0 bg-blue-900/80 z-0 backdrop-blur-sm"></div>
         
         <div className="relative z-[1] max-w-5xl mx-auto px-6 text-center">
           <Fade direction="up" triggerOnce duration={1000} cascade damping={0.1}>
@@ -130,7 +131,7 @@ export default function Careers() {
               </span>
             </h2>
             <p className="mt-6 text-xl md:text-2xl text-blue-100/90 font-light">
-              Join our mission to provide **clean water** and **efficient sewerage services** to Karachi.
+              Join our mission to provide clean water and efficient sewerage services to Karachi.
             </p>
           </Fade>
         </div>
@@ -142,7 +143,7 @@ export default function Careers() {
           <div className="text-center mb-20">
             <Fade direction="down" triggerOnce duration={1000}>
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-                Opportunities to **Make a Difference**
+                Opportunities To Make A Difference
               </h1>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto">
                 Discover the path that aligns with your professional aspirations and contribute to the core infrastructure of the city.
@@ -266,7 +267,7 @@ export default function Careers() {
                     className="inline-flex items-center px-8 py-4 bg-cyan-400 text-gray-900 font-bold rounded-lg transition-all hover:bg-cyan-300 shadow-lg shadow-cyan-400/50"
                   >
                     <Mail className="w-5 h-5 mr-3" />
-                    Email HR: hr@kwsc.gos.pk
+                    Email: info@kwsc.gos.pk
                   </a>
                   <a
                     href="tel:+92021111597200"
