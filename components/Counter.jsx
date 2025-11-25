@@ -48,11 +48,11 @@ const Counter = ({ stats }) => {
           Our Achievements
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+        <div className="flex flex-wrap justify-center gap-12 md:gap-16 text-center">
           {counters.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col items-center justify-center group cursor-pointer transition-transform duration-500 hover:-translate-y-2"
+              className="flex flex-col items-center justify-center group cursor-pointer transition-transform duration-500 hover:-translate-y-2 w-full sm:w-[45%] lg:w-[22%]"
             >
               <div className="mb-3 transition-transform duration-500 group-hover:scale-110">{item.icon}</div>
               <div className="text-5xl md:text-6xl font-extrabold text-gray-900 flex items-center justify-center transition-colors duration-500 group-hover:text-cyan-500">

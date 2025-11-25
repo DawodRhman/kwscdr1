@@ -6,141 +6,6 @@ import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
 import { FiDownload, FiSearch, FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-// --- Dummy Data Expansion for 10+ items ---
-const allOpenTenders = [
-  {
-    id: 1,
-    title: "Supply of Water Treatment Chemicals",
-    date: "Aug 20, 2025",
-    description: "KW&SC invites suppliers for the provision of high-grade water treatment chemicals.",
-    fullDetails:
-      "This tender includes supply, delivery, and testing of certified water treatment chemicals. Bidders must be registered vendors with relevant experience and ISO certification. Delivery timeline is critical.",
-    type: "Procurement",
-    downloadLink: "#download-1",
-  },
-  {
-    id: 2,
-    title: "Pipeline Rehabilitation Works - Zone B",
-    date: "Aug 15, 2025",
-    description: "Tender for pipeline repair and rehabilitation in designated Zone B.",
-    fullDetails:
-      "Rehabilitation includes excavation, replacement of damaged sections (up to 500m total), and pressure testing. All contractors must follow KW&SC engineering standards and have prior municipal work experience.",
-    type: "Construction",
-    downloadLink: "#download-2",
-  },
-  {
-    id: 3,
-    title: "IT System Upgrade & Maintenance",
-    date: "Aug 10, 2025",
-    description: "Upgrade of central billing and customer management software.",
-    fullDetails: "Scope includes migration to a new cloud-based system, staff training, and 3 years of post-implementation maintenance support.",
-    type: "Services",
-    downloadLink: "#download-3",
-  },
-  {
-    id: 4,
-    title: "Bulk Meter Supply & Installation",
-    date: "Aug 05, 2025",
-    description: "Procurement and installation of 500 industrial-grade flow meters.",
-    fullDetails: "Tender for DN300 to DN600 electromagnetic flow meters. Supply must meet international standards. Installation services are mandatory.",
-    type: "Procurement",
-    downloadLink: "#download-4",
-  },
-  {
-    id: 5,
-    title: "Security & Guard Services Contract",
-    date: "July 30, 2025",
-    description: "Contract for armed and unarmed security personnel for all facilities.",
-    fullDetails: "Requires a licensed security firm to provide 24/7 coverage for pumping stations, offices, and reservoirs. Must comply with all local security regulations.",
-    type: "Services",
-    downloadLink: "#download-5",
-  },
-  {
-    id: 6,
-    title: "Office Stationery and Supplies",
-    date: "July 25, 2025",
-    description: "Annual supply tender for all general office consumables.",
-    fullDetails: "Includes paper, printer cartridges, general stationery, and cleaning supplies for a period of 12 months, delivered to 4 main distribution points.",
-    type: "Procurement",
-    downloadLink: "#download-6",
-  },
-  {
-    id: 7,
-    title: "Vehicle Fleet Maintenance",
-    date: "July 20, 2025",
-    description: "Maintenance and repair contract for KW&SC's vehicle fleet (light and heavy vehicles).",
-    fullDetails: "Scope includes routine servicing, accidental repair, and parts replacement for over 150 vehicles. Bidder must have a fully equipped workshop.",
-    type: "Maintenance",
-    downloadLink: "#download-7",
-  },
-  {
-    id: 8,
-    title: "Reservoir Cleaning and Desilting",
-    date: "July 15, 2025",
-    description: "Specialized services for cleaning and desilting two main water reservoirs.",
-    fullDetails: "Work must be conducted during scheduled shutdown periods, utilizing non-hazardous methods and adhering to strict environmental guidelines.",
-    type: "Construction",
-    downloadLink: "#download-8",
-  },
-  {
-    id: 9,
-    title: "HR Consultancy for Training",
-    date: "July 10, 2025",
-    description: "Consultancy services for staff development and professional training programs.",
-    fullDetails: "Design and deliver a series of workshops on modern management techniques and public service ethics for mid-to-senior level staff.",
-    type: "Services",
-    downloadLink: "#download-9",
-  },
-  {
-    id: 10,
-    title: "Civil Works for New Office Block",
-    date: "July 01, 2025",
-    description: "Tender for the foundation and structural civil works of a new administrative building.",
-    fullDetails: "Phase 1 construction involving site preparation, foundation laying, and erection of the main structure up to the roof slab. Compliance with local building codes is mandatory.",
-    type: "Construction",
-    downloadLink: "#download-10",
-  },
-];
-
-const closedTenders = [
-  {
-    id: 11,
-    title: "Electrical Maintenance Services",
-    date: "July 10, 2025",
-    description: "Closed tender for maintenance of electrical systems across facilities.",
-    type: "Maintenance",
-    status: "Closed",
-  },
-  {
-    id: 12,
-    title: "Machinery Equipment Supply",
-    date: "June 22, 2025",
-    description: "Closed tender for industrial machinery procurement.",
-    type: "Procurement",
-    status: "Closed",
-  },
-];
-
-const cancelledTenders = [
-  {
-    id: 13,
-    title: "Drilling Equipment Purchase",
-    date: "May 15, 2025",
-    description: "Tender cancelled due to revised project scope and budgetary constraints.",
-    type: "Procurement",
-    status: "Cancelled",
-  },
-  {
-    id: 14,
-    title: "Water Quality Lab Upgrade",
-    date: "Apr 01, 2025",
-    description: "Tender cancelled; process will be re-initiated later with new specifications.",
-    type: "Construction",
-    status: "Cancelled",
-  },
-];
-// --- End Dummy Data ---
-
 // --- New Search/Filter Component ---
 const SearchFilter = React.memo(({ onFilterChange, allTenders }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -149,7 +14,7 @@ const SearchFilter = React.memo(({ onFilterChange, allTenders }) => {
 
   // Extract unique types from open tenders
   const uniqueTypes = useMemo(() => {
-    const types = allTenders.map(t => t.type);
+    const types = allTenders.map(t => t.category || "General");
     return ["All", ...new Set(types)];
   }, [allTenders]);
 
@@ -192,7 +57,7 @@ const SearchFilter = React.memo(({ onFilterChange, allTenders }) => {
 
               {/* Type Filter */}
               <div>
-                <label htmlFor="type-filter" className="block text-sm font-medium text-gray-700 mb-1">Filter by Type</label>
+                <label htmlFor="type-filter" className="block text-sm font-medium text-gray-700 mb-1">Filter by Category</label>
                 <select
                   id="type-filter"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 bg-white"
@@ -218,6 +83,8 @@ export default function Tenders() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("open");
   const [filters, setFilters] = useState({ searchTerm: "", filterType: "All" });
+  const [tendersData, setTendersData] = useState(null);
+  const [dataError, setDataError] = useState(null);
 
   // GSAP Loader Effect (kept as is)
   useEffect(() => {
@@ -244,11 +111,39 @@ export default function Tenders() {
       );
   }, []);
 
+  useEffect(() => {
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/tenders");
+        if (!response.ok) throw new Error("Failed to fetch Tenders data");
+        const payload = await response.json();
+        if (isMounted) {
+          setTendersData(payload.data);
+        }
+      } catch (error) {
+        console.error("Error fetching Tenders data:", error);
+        if (isMounted) setDataError("Unable to load tenders.");
+      }
+    };
+    fetchData();
+    return () => { isMounted = false; };
+  }, []);
+
   const handleFilterChange = useCallback((newFilters) => {
     setFilters(newFilters);
     // Reset open item when filters change to prevent showing details of a hidden item
     setOpenId(null);
   }, []);
+
+  const allOpenTenders = tendersData?.open || [];
+  const closedTenders = tendersData?.closed || [];
+  const cancelledTenders = tendersData?.cancelled || [];
+  const hero = tendersData?.hero || {
+    title: "Tenders",
+    subtitle: "Official tender notices, procurement opportunities, and bidding documents",
+    backgroundImage: "/karachicharminar.gif",
+  };
 
   // Memoized filtered tenders logic
   const filteredTenders = useMemo(() => {
@@ -257,31 +152,32 @@ export default function Tenders() {
 
     return allOpenTenders.filter(tender => {
       const matchesSearch =
-        tender.title.toLowerCase().includes(lowerSearchTerm) ||
-        tender.description.toLowerCase().includes(lowerSearchTerm);
+        (tender.title || "").toLowerCase().includes(lowerSearchTerm) ||
+        (tender.summary || "").toLowerCase().includes(lowerSearchTerm);
 
-      const matchesType = filterType === "All" || tender.type === filterType;
+      const matchesType = filterType === "All" || (tender.category || "General") === filterType;
 
       return matchesSearch && matchesType;
     });
-  }, [filters]);
+  }, [filters, allOpenTenders]);
 
   // Tenders Card Component (Compact Square Design)
   const TenderCard = ({ item, tabName, index }) => {
     const isExpanded = tabName === "open" && openId === item.id;
     const isClosedOrCancelled = tabName !== "open";
-    const status = isClosedOrCancelled ? item.status : item.type; // Use status for closed/cancelled
+    const status = isClosedOrCancelled ? item.status : (item.category || "Open"); // Use status for closed/cancelled
 
     const typeClasses = {
       Procurement: "bg-green-100 text-green-800 border-green-400",
       Construction: "bg-orange-100 text-orange-800 border-orange-400",
       Services: "bg-purple-100 text-purple-800 border-purple-400",
       Maintenance: "bg-yellow-100 text-yellow-800 border-yellow-400",
-      Closed: "bg-red-100 text-red-800 border-red-400",
-      Cancelled: "bg-gray-100 text-gray-700 border-gray-400",
+      CLOSED: "bg-red-100 text-red-800 border-red-400",
+      CANCELLED: "bg-gray-100 text-gray-700 border-gray-400",
+      Open: "bg-blue-100 text-blue-800 border-blue-400",
     };
 
-    const cardClasses = typeClasses[status] || typeClasses.Cancelled;
+    const cardClasses = typeClasses[status] || typeClasses.Open;
     const chipColor = cardClasses.split(' ').slice(0, 2).join(' '); // Extracts bg- and text- classes
 
     return (
@@ -293,13 +189,13 @@ export default function Tenders() {
               {status}
             </span>
             <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2" title={item.title}>{item.title}</h3>
-            <p className="text-gray-600 text-sm mb-4 line-clamp-3">{item.description}</p>
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3">{item.summary}</p>
           </div>
 
           {/* Footer/Actions */}
           <div className="mt-auto pt-3">
             <span className="text-gray-500 text-xs block mb-3">
-              {tabName === "open" ? "Due Date:" : "Closed/Cancelled Date:"} **{item.date}**
+              {tabName === "open" ? "Due Date:" : "Closed/Cancelled Date:"} **{new Date(item.closingAt || item.publishedAt).toLocaleDateString()}**
             </span>
 
             {/* Action Buttons */}
@@ -321,8 +217,8 @@ export default function Tenders() {
               )}
 
               {/* Download button only for open tenders */}
-              {tabName === "open" && (
-                <Link href={item.downloadLink} className="text-gray-400 hover:text-green-600 transition-colors ml-4" title="Download Tender Documents">
+              {tabName === "open" && item.attachments && item.attachments.length > 0 && (
+                <Link href={item.attachments[0].url || "#"} className="text-gray-400 hover:text-green-600 transition-colors ml-4" title="Download Tender Documents">
                   <FiDownload className="w-5 h-5" />
                 </Link>
               )}
@@ -332,7 +228,17 @@ export default function Tenders() {
           {/* Expanded Details (For Open Tenders Only) */}
           {isExpanded && (
             <div id={`details-${item.id}`} className="mt-4 pt-4 border-t border-blue-200">
-              <p className="text-sm text-gray-700 leading-relaxed bg-blue-50 p-3 rounded-lg font-medium">{item.fullDetails}</p>
+              <p className="text-sm text-gray-700 leading-relaxed bg-blue-50 p-3 rounded-lg font-medium">{item.summary}</p>
+              {item.attachments && item.attachments.length > 0 && (
+                 <div className="mt-2">
+                    <h4 className="text-xs font-bold text-gray-600 mb-1">Documents:</h4>
+                    <ul className="list-disc list-inside text-xs text-blue-600">
+                        {item.attachments.map(att => (
+                            <li key={att.id}><a href={att.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{att.label || "Download"}</a></li>
+                        ))}
+                    </ul>
+                 </div>
+              )}
             </div>
           )}
         </div>
@@ -345,13 +251,15 @@ export default function Tenders() {
       {loading && <Loader />}
 
       {/* Hero Section */}
-      <section className="relative h-screen transition-opacity duration-700 bg-[url('/karachicharminar.gif')] bg-cover bg-center text-white flex justify-center items-center">
+      <section className="relative h-screen transition-opacity duration-700 bg-cover bg-center text-white flex justify-center items-center"
+        style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
+      >
         <div className="absolute inset-0 bg-blue-900/60 z-0"></div>
 
         <div className="relative z-[1] max-w-[75%] m-20 mx-auto flex items-center justify-center text-center">
           <div className="w-[85%]">
-            <h2 className="text-[8vh] font-extrabold tracking-tight">Tenders</h2>
-            <p className="mt-6 text-[3.5vh] font-light">Official tender notices, procurement opportunities, and bidding documents</p>
+            <h2 className="text-[8vh] font-extrabold tracking-tight">{hero.title}</h2>
+            <p className="mt-6 text-[3.5vh] font-light">{hero.subtitle}</p>
           </div>
         </div>
       </section>
@@ -440,7 +348,7 @@ export default function Tenders() {
             {activeTab === "closed" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {closedTenders.map((item, i) => (
-                  <TenderCard key={item.id} item={{ ...item, status: "Closed" }} tabName="closed" index={i} />
+                  <TenderCard key={item.id} item={{ ...item, status: "CLOSED" }} tabName="closed" index={i} />
                 ))}
               </div>
             )}
@@ -448,7 +356,7 @@ export default function Tenders() {
             {activeTab === "cancelled" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cancelledTenders.map((item, i) => (
-                  <TenderCard key={item.id} item={{ ...item, status: "Cancelled" }} tabName="cancelled" index={i} />
+                  <TenderCard key={item.id} item={{ ...item, status: "CANCELLED" }} tabName="cancelled" index={i} />
                 ))}
               </div>
             )}

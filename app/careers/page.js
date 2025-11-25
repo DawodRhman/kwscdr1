@@ -9,9 +9,54 @@ import { Briefcase, Zap, Building, MapPin, Clock, Mail, Phone, ArrowUpRight } fr
 
 export default function Careers() {
   const [loading, setLoading] = useState(true);
+  const [careersData, setCareersData] = useState(null);
+  const [dataError, setDataError] = useState(null);
 
-  // Data remains the same, but moving outside the component for cleaner JSX
-  const careerOpportunities = [
+  // GSAP Loader Effect (Kept as is)
+  useEffect(() => {
+    const loaderTimeline = gsap.timeline({
+      onComplete: () => setLoading(false),
+    });
+
+    loaderTimeline
+      .fromTo(
+        ".loader",
+        { scaleY: 0, transformOrigin: "50% 100%" },
+        { scaleY: 1, duration: 0.5, ease: "power2.inOut" }
+      )
+      .to(".loader", {
+        scaleY: 0,
+        transformOrigin: "0% -100%",
+        duration: 0.5,
+        ease: "power2.inOut",
+      })
+      .to(
+        ".wrapper",
+        { y: "-100%", ease: "power4.inOut", duration: 1 },
+        "-=0.8"
+      );
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/careers");
+        if (!response.ok) throw new Error("Failed to fetch Careers data");
+        const payload = await response.json();
+        if (isMounted) {
+          setCareersData(payload.data);
+        }
+      } catch (error) {
+        console.error("Error fetching Careers data:", error);
+        if (isMounted) setDataError("Unable to load careers.");
+      }
+    };
+    fetchData();
+    return () => { isMounted = false; };
+  }, []);
+
+  const defaultOpportunities = [
     {
       title: "Recruitment",
       description: "Join KW&SC's team of dedicated professionals working to improve Karachi's essential water and sewerage infrastructure.",
@@ -53,85 +98,50 @@ export default function Careers() {
     }
   ];
 
-  const currentOpenings = [
-    {
-      id: 1,
-      position: "Executive Engineer (Water)",
-      department: "Water Supply Department",
-      location: "Karachi",
-      type: "Full-time",
-      experience: "5+ years"
-    },
-    {
-      id: 2,
-      position: "Executive Engineer (Sewerage)",
-      department: "Sewerage Department",
-      location: "Karachi",
-      type: "Full-time",
-      experience: "5+ years"
-    },
-    {
-      id: 3,
-      position: "Assistant Engineer",
-      department: "Technical Services",
-      location: "Karachi",
-      type: "Full-time",
-      experience: "2+ years"
-    },
-    {
-      id: 4,
-      position: "Graduate Trainee",
-      department: "Various Departments",
-      location: "Karachi",
-      type: "Training Program",
-      experience: "Fresh Graduate"
-    }
-  ];
+  const careerOpportunities = careersData?.programs?.length > 0 
+    ? careersData.programs.map(prog => ({
+        title: prog.title,
+        description: prog.heroBody || prog.summary || "",
+        features: prog.eligibility ? Object.values(prog.eligibility) : [],
+        link: `/careers/${prog.slug}`,
+        type: "Program"
+      }))
+    : defaultOpportunities;
 
-  // GSAP Loader Effect (Kept as is)
-  useEffect(() => {
-    const loaderTimeline = gsap.timeline({
-      onComplete: () => setLoading(false),
-    });
+  const currentOpenings = careersData?.openings?.length > 0
+    ? careersData.openings.map(op => ({
+        id: op.id,
+        position: op.title,
+        department: op.department || "General",
+        location: op.location || "Karachi",
+        type: op.jobType || "Full-time",
+        experience: op.compensation || "N/A" // Using compensation field for experience/salary info as placeholder
+      }))
+    : [];
 
-    loaderTimeline
-      .fromTo(
-        ".loader",
-        { scaleY: 0, transformOrigin: "50% 100%" },
-        { scaleY: 1, duration: 0.5, ease: "power2.inOut" }
-      )
-      .to(".loader", {
-        scaleY: 0,
-        transformOrigin: "0% -100%",
-        duration: 0.5,
-        ease: "power2.inOut",
-      })
-      .to(
-        ".wrapper",
-        { y: "-100%", ease: "power4.inOut", duration: 1 },
-        "-=0.8"
-      );
-  }, []);
+  const hero = careersData?.hero || {
+    title: "Careers at KW&SC",
+    subtitle: "Join our mission to provide clean water and efficient sewerage services to Karachi.",
+    backgroundImage: "/teentalwarkarachi.gif",
+  };
 
   return (
     <>
       {loading && <Loader />}
       
       {/* 1. Enhanced Hero Section */}
-       <section  className={`relative h-[15vh] md:h-[70vh] transition-opacity duration-700 bg-[url('/teentalwarkarachi.gif')] bg-cover bg-center text-white flex justify-center items-center`}
+       <section  className={`relative h-[15vh] md:h-[70vh] transition-opacity duration-700 bg-cover bg-center text-white flex justify-center items-center`}
+        style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
 >
   <div className="absolute inset-0 bg-blue-900/80 z-0 backdrop-blur-sm"></div>
         
         <div className="relative z-[1] max-w-5xl mx-auto px-6 text-center">
           <Fade direction="up" triggerOnce duration={1000} cascade damping={0.1}>
             <h2 className="text-6xl md:text-8xl font-extrabold tracking-tight">
-              Careers at 
-              <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300">
-                KW&SC
-              </span>
+              {hero.title}
             </h2>
             <p className="mt-6 text-xl md:text-2xl text-blue-100/90 font-light">
-              Join our mission to provide clean water and efficient sewerage services to Karachi.
+              {hero.subtitle}
             </p>
           </Fade>
         </div>
@@ -218,36 +228,42 @@ export default function Careers() {
               Current Openings
           </h2>
           <div className="space-y-4">
-            {currentOpenings.map((opening, index) => (
-              <Fade key={opening.id} direction="up" triggerOnce duration={800} delay={index * 50}>
-                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-md grid grid-cols-1 lg:grid-cols-5 items-center gap-4 transition-all duration-300 hover:shadow-lg hover:border-blue-300">
-                  
-                  {/* Position */}
-                  <h3 className="text-xl font-bold text-blue-800 col-span-2">
-                    {opening.position}
-                  </h3>
-                  
-                  {/* Details (Flex/Icons) */}
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <Building className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
-                    {opening.department}
-                  </div>
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <MapPin className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
-                    {opening.location}
-                  </div>
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <Clock className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
-                    {opening.experience}
-                  </div>
+            {currentOpenings.length > 0 ? (
+              currentOpenings.map((opening, index) => (
+                <Fade key={opening.id} direction="up" triggerOnce duration={800} delay={index * 50}>
+                  <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-md grid grid-cols-1 lg:grid-cols-5 items-center gap-4 transition-all duration-300 hover:shadow-lg hover:border-blue-300">
+                    
+                    {/* Position */}
+                    <h3 className="text-xl font-bold text-blue-800 col-span-2">
+                      {opening.position}
+                    </h3>
+                    
+                    {/* Details (Flex/Icons) */}
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Building className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                      {opening.department}
+                    </div>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <MapPin className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                      {opening.location}
+                    </div>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <Clock className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                      {opening.experience}
+                    </div>
 
-                  {/* Apply Button */}
-                  <button className="lg:col-span-1 w-full lg:w-auto px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md">
-                    Apply Now
-                  </button>
-                </div>
-              </Fade>
-            ))}
+                    {/* Apply Button */}
+                    <button className="lg:col-span-1 w-full lg:w-auto px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md">
+                      Apply Now
+                    </button>
+                  </div>
+                </Fade>
+              ))
+            ) : (
+              <div className="text-center py-10 bg-gray-50 rounded-xl">
+                <p className="text-gray-500">No current openings available. Please check back later.</p>
+              </div>
+            )}
           </div>
           
           {/* 3. Contact Information / CTA */}

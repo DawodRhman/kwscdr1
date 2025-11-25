@@ -58,7 +58,7 @@ const PANELS = [
   { id: "workflow", label: "Workflow", icon: GitMerge, description: "Process steps", permissions: ["settings:write"] },
   { id: "achievements", label: "Achievements", icon: Trophy, description: "Awards & milestones", permissions: ["settings:write"] },
   { id: "faq", label: "FAQs", icon: HelpCircle, description: "Questions & answers", permissions: ["faq:write"] },
-  { id: "rti", label: "RTI Documents", icon: FileSearch, description: "Legal disclosures", permissions: ["settings:write"] },
+  { id: "rti", label: "RTI Documents", icon: FileSearch, description: "Legal disclosures", permissions: ["rti:write"] },
   { id: "education", label: "Education", icon: GraduationCap, description: "Learning resources", permissions: ["education:write"] },
   { id: "watertoday", label: "Water Today", icon: Droplets, description: "Daily updates", permissions: ["watertoday:write"] },
   { id: "social", label: "Social Links", icon: Share2, description: "Connected channels", permissions: ["settings:write"] },

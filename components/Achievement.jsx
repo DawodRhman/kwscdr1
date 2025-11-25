@@ -71,7 +71,7 @@ export default function AchievementComponent({ items }) {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {achievements.map((achievement, index) => (
           <Fade
             key={achievement.id || index}
@@ -79,14 +79,12 @@ export default function AchievementComponent({ items }) {
             triggerOnce
             duration={600}
             delay={index * 100}
-                    onError={(event) => {
-                      event.currentTarget.src = DEFAULT_ICON;
-                    }}
+            className="w-full md:w-[48%] lg:w-[30%]"
           >
             <div
               className="group relative bg-gray-900/60 backdrop-blur-md rounded-xl p-6 border border-gray-700/50 
                          transition-all duration-300 hover:-translate-y-1 hover:bg-gray-800/80
-                         hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                         hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] h-full"
             >
               {/* Futuristic Corner Accent */}
               <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-cyan-500/50 rounded-tr-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>

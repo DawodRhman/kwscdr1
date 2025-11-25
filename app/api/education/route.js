@@ -1,0 +1,70 @@
+import { NextResponse } from "next/server";
+import { SnapshotModule } from "@prisma/client";
+import prisma from "@/lib/prisma";
+import { resolveWithSnapshot } from "@/lib/cache";
+import { resolvePageSeo } from "@/lib/seo";
+
+const HERO_CONTENT = {
+  title: "Education & Awareness",
+  subtitle: "Empowering the community with knowledge about water conservation and hygiene.",
+  backgroundImage: "/karachicharminar.gif",
+};
+
+function serializeResource(resource) {
+  return {
+    id: resource.id,
+    title: resource.title,
+    description: resource.summary,
+    image: resource.media ? resource.media.url : "/images/placeholder.jpg",
+    content: resource.content,
+  };
+}
+
+export async function GET() {
+  try {
+    const { data, stale } = await resolveWithSnapshot(
+      SnapshotModule.EDUCATION,
+      async () => {
+        let resources = [];
+        
+        try {
+          resources = await prisma.educationResource.findMany({
+            orderBy: { createdAt: "desc" },
+            include: { media: true },
+          });
+        } catch (dbError) {
+           console.warn("⚠️ Database unreachable in Education API. Using empty list.");
+        }
+
+        const hero = HERO_CONTENT;
+
+        const seo = await resolvePageSeo({
+          canonicalUrl: "/education",
+          fallback: {
+            title: `${hero.title} | Karachi Water & Sewerage Corporation`,
+            description: hero.subtitle,
+            ogImageUrl: hero.backgroundImage,
+          },
+        });
+
+        return {
+          hero,
+          resources: resources.map(serializeResource),
+          seo,
+        };
+      }
+    );
+
+    return NextResponse.json({ data, meta: { stale } });
+  } catch (error) {
+    console.error("GET /api/education", error);
+    return NextResponse.json({ 
+        data: {
+          hero: HERO_CONTENT,
+          resources: [],
+          seo: null
+        }, 
+        meta: { stale: true } 
+    });
+  }
+}

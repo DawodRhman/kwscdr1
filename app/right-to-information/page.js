@@ -7,6 +7,8 @@ import Link from "next/link";
 
 export default function RightToInformation() {
   const [loading, setLoading] = useState(true);
+  const [rtiData, setRtiData] = useState(null);
+  const [dataError, setDataError] = useState(null);
 
   useEffect(() => {
     const loaderTimeline = gsap.timeline({
@@ -32,7 +34,26 @@ export default function RightToInformation() {
       );
   }, []);
 
-  const documents = [
+  useEffect(() => {
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/rti");
+        if (!response.ok) throw new Error("Failed to fetch RTI data");
+        const payload = await response.json();
+        if (isMounted) {
+          setRtiData(payload.data);
+        }
+      } catch (error) {
+        console.error("Error fetching RTI data:", error);
+        if (isMounted) setDataError("Unable to load documents.");
+      }
+    };
+    fetchData();
+    return () => { isMounted = false; };
+  }, []);
+
+  const defaultDocuments = [
     {
       title: "Application Form for Groundwater Licence",
       description: "Download the official form for groundwater licence applications",
@@ -71,20 +92,29 @@ export default function RightToInformation() {
     }
   ];
 
+  const documents = rtiData?.documents?.length > 0 ? rtiData.documents : defaultDocuments;
+  const hero = rtiData?.hero || {
+    title: "Right to Information",
+    subtitle: "Access official documents, forms, and information about KW&SC operations",
+    backgroundImage: "/teentalwarkarachi.gif",
+  };
+
   return (
     <>
       {loading && <Loader />}
       
-      <section className={`relative h-screen transition-opacity duration-700 bg-[url('/teentalwarkarachi.gif')] bg-cover text-white flex justify-center items-center`}>
+      <section className={`relative h-screen transition-opacity duration-700 bg-cover text-white flex justify-center items-center`}
+        style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
+      >
         <div className="absolute inset-0 bg-blue-900/60 z-0"></div>
         
         <div className="relative z-[1] max-w-[75%] m-20 mx-auto flex items-center justify-center text-center">
           <div className="w-[85%]">
             <h2 className="text-[8vh] font-bold">
-              Right to Information
+              {hero.title}
             </h2>
             <p className="mt-6 text-[3.5vh]">
-              Access official documents, forms, and information about KW&SC operations
+              {hero.subtitle}
             </p>
           </div>
         </div>

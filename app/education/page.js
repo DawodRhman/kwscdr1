@@ -4,8 +4,10 @@ import Loader from "@/components/Loader";
 import gsap from "gsap";
 import { Fade } from "react-awesome-reveal";
 
-export default function WaterToday() {
+export default function Education() {
   const [loading, setLoading] = useState(true);
+  const [educationData, setEducationData] = useState(null);
+  const [dataError, setDataError] = useState(null);
 
   useEffect(() => {
     const loaderTimeline = gsap.timeline({ onComplete: () => setLoading(false) });
@@ -16,7 +18,26 @@ export default function WaterToday() {
       .to(".wrapper", { y: "-100%", ease: "power4.inOut", duration: 1 }, "-=0.8");
   }, []);
 
-  const posts = [
+  useEffect(() => {
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/education");
+        if (!response.ok) throw new Error("Failed to fetch Education data");
+        const payload = await response.json();
+        if (isMounted) {
+          setEducationData(payload.data);
+        }
+      } catch (error) {
+        console.error("Error fetching Education data:", error);
+        if (isMounted) setDataError("Unable to load educational resources.");
+      }
+    };
+    fetchData();
+    return () => { isMounted = false; };
+  }, []);
+
+  const defaultPosts = [
     {
       title: "Clean Water Initiatives",
       description: "KW&SC ensures safe and potable water for all citizens through modern filtration and distribution systems.",
@@ -34,29 +55,38 @@ export default function WaterToday() {
     },
   ];
 
+  const posts = educationData?.resources?.length > 0 ? educationData.resources : defaultPosts;
+  const hero = educationData?.hero || {
+    title: "Education & Awareness",
+    subtitle: "Empowering the community with knowledge about water conservation and hygiene.",
+    backgroundImage: "/karachicharminar.gif",
+  };
+
   return (
     <>
       {loading && <Loader />}
 
-      {/* Hero Banner (News-style) */}
-      <section className="relative h-[60vh] md:h-[80vh] bg-[url('/karachicharminar.gif')] bg-cover bg-center text-white flex justify-center items-center overflow-hidden">
+      {/* Hero Banner */}
+      <section className="relative h-[60vh] md:h-[80vh] bg-cover bg-center text-white flex justify-center items-center overflow-hidden"
+        style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
+      >
         <div className="absolute inset-0 bg-slate-900/80 z-0"></div>
         <div className="absolute inset-0 bg-[linear-gradient(to right, rgba(6,182,212,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(6,182,212,0.1) 1px, transparent 1px)] bg-[size:40px_40px] opacity-30 z-0"></div>
         <div className="relative z-[1] max-w-4xl text-center px-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-6 backdrop-blur-md">
-            KW&SC INFORMATION GRID
+            KW&SC EDUCATION
           </div>
           <h2 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-cyan-200 drop-shadow-[0_0_25px_rgba(6,182,212,0.5)]">
-            WATER TODAY
+            {hero.title}
           </h2>
           <p className="mt-6 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light">
-            Real-time insights into KW&SC’s water and sewerage initiatives shaping Karachi’s future.
+            {hero.subtitle}
           </p>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#020617] to-transparent z-10"></div>
       </section>
 
-      {/* Simple Water Today Posts */}
+      {/* Education Posts */}
       <section className="bg-[#020617] text-white py-20">
         <div className="max-w-6xl mx-auto px-6 space-y-16">
           {posts.map((post, i) => (

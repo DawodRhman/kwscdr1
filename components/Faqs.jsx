@@ -1,39 +1,51 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, HelpCircle } from "lucide-react";
 
-export default function FAQs() {
+const FALLBACK_FAQS = [
+  {
+    question: "How can I get a new water connection?",
+    answer: "For residential, commercial, bulk, or industrial connections, you need to submit an application form along with required documents to the nearest KW&SC office. The process includes site inspection, approval, and connection installation.",
+    category: "New Connection"
+  },
+  {
+    question: "How can I get a duplicate bill?",
+    answer: "You can obtain a duplicate bill by visiting our online portal at web.kwsb.crdc.biz or by visiting the nearest KW&SC office with your account number and CNIC.",
+    category: "Billing"
+  },
+  {
+    question: "Where can I complain about sewerage?",
+    answer: "You can register sewerage complaints through our online complaint system at complain.kwsc.gos.pk or contact our customer service helpline at (+92) 021 111 597 200.",
+    category: "Complaints"
+  },
+  {
+    question: "How can I order a water tanker?",
+    answer: "You can order water tankers through our online booking system at campaign.kwsc.gos.pk or by calling our customer service helpline directly.",
+    category: "Tanker Service"
+  },
+  {
+    question: "How can I report water theft?",
+    answer: "Report water theft by calling our helpline (+92) 021 111 597 200. You can also contact the Hydrant Management Cell for immediate action against illegal connections.",
+    category: "Water Theft"
+  }
+];
+
+function normalizeFaqs(items) {
+  const source = Array.isArray(items) && items.length ? items : FALLBACK_FAQS;
+  return source.map((item) => ({
+    id: item.id || item.question,
+    question: item.question,
+    answer: item.answer,
+    category: item.category?.title || item.category || "General",
+  }));
+}
+
+export default function FAQs({ items }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const faqs = [
-    {
-      question: "How can I get a new water connection?",
-      answer: "For residential, commercial, bulk, or industrial connections, you need to submit an application form along with required documents to the nearest KW&SC office. The process includes site inspection, approval, and connection installation.",
-      category: "New Connection"
-    },
-    {
-      question: "How can I get a duplicate bill?",
-      answer: "You can obtain a duplicate bill by visiting our online portal at web.kwsb.crdc.biz or by visiting the nearest KW&SC office with your account number and CNIC.",
-      category: "Billing"
-    },
-    {
-      question: "Where can I complain about sewerage?",
-      answer: "You can register sewerage complaints through our online complaint system at complain.kwsc.gos.pk or contact our customer service helpline at (+92) 021 111 597 200.",
-      category: "Complaints"
-    },
-    {
-      question: "How can I order a water tanker?",
-      answer: "You can order water tankers through our online booking system at campaign.kwsc.gos.pk or by calling our customer service helpline directly.",
-      category: "Tanker Service"
-    },
-    {
-      question: "How can I report water theft?",
-      answer: "Report water theft by calling our helpline (+92) 021 111 597 200. You can also contact the Hydrant Management Cell for immediate action against illegal connections.",
-      category: "Water Theft"
-    }
-  ];
+  const faqs = useMemo(() => normalizeFaqs(items), [items]);
 
   // Auto-slide logic
   useEffect(() => {
@@ -42,7 +54,7 @@ export default function FAQs() {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, faqs.length]);
 
   const nextSlide = () => {
     setDirection(1);
@@ -53,6 +65,7 @@ export default function FAQs() {
     setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? faqs.length - 1 : prev - 1));
   };
+
 
   // Animation Variants
   const slideVariants = {
