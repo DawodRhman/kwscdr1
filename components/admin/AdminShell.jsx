@@ -16,6 +16,14 @@ import {
   Sparkles,
   Clock4,
   ImageDown,
+  BarChart3,
+  MapPin,
+  GitMerge,
+  Trophy,
+  HelpCircle,
+  FileSearch,
+  GraduationCap,
+  Droplets,
 } from "lucide-react";
 import ServicesPanel from "@/components/admin/services/ServicesPanel";
 import TendersPanel from "@/components/admin/tenders/TendersPanel";
@@ -27,6 +35,14 @@ import SocialLinksPanel from "@/components/admin/social/SocialLinksPanel";
 import MediaLibraryPanel from "@/components/admin/media/MediaLibraryPanel";
 import UserManagementPanel from "@/components/admin/users/UserManagementPanel";
 import AuditPanel from "@/components/admin/audit/AuditPanel";
+import StatsPanel from "@/components/admin/stats/StatsPanel";
+import LocationsPanel from "@/components/admin/locations/LocationsPanel";
+import WorkflowPanel from "@/components/admin/workflow/WorkflowPanel";
+import AchievementsPanel from "@/components/admin/achievements/AchievementsPanel";
+import FaqPanel from "@/components/admin/faq/FaqPanel";
+import RtiPanel from "@/components/admin/rti/RtiPanel";
+import EducationPanel from "@/components/admin/education/EducationPanel";
+import WaterTodayPanel from "@/components/admin/watertoday/WaterTodayPanel";
 
 const PANELS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard, description: "At-a-glance insight" },
@@ -37,6 +53,14 @@ const PANELS = [
   { id: "media", label: "Media Library", icon: ImageDown, description: "Assets & uploads", permissions: ["media:write"] },
   { id: "projects", label: "Projects", icon: Building2, description: "Portfolio highlights", permissions: ["projects:write"] },
   { id: "leadership", label: "Leadership", icon: UserRound, description: "Executive bios", permissions: ["leadership:write"] },
+  { id: "stats", label: "Stats & Counters", icon: BarChart3, description: "Homepage metrics", permissions: ["settings:write"] },
+  { id: "locations", label: "Locations", icon: MapPin, description: "Office addresses", permissions: ["settings:write"] },
+  { id: "workflow", label: "Workflow", icon: GitMerge, description: "Process steps", permissions: ["settings:write"] },
+  { id: "achievements", label: "Achievements", icon: Trophy, description: "Awards & milestones", permissions: ["settings:write"] },
+  { id: "faq", label: "FAQs", icon: HelpCircle, description: "Questions & answers", permissions: ["faq:write"] },
+  { id: "rti", label: "RTI Documents", icon: FileSearch, description: "Legal disclosures", permissions: ["settings:write"] },
+  { id: "education", label: "Education", icon: GraduationCap, description: "Learning resources", permissions: ["education:write"] },
+  { id: "watertoday", label: "Water Today", icon: Droplets, description: "Daily updates", permissions: ["watertoday:write"] },
   { id: "social", label: "Social Links", icon: Share2, description: "Connected channels", permissions: ["settings:write"] },
   { id: "users", label: "Operators", icon: Users, description: "RBAC assignments", permissions: ["users:write"] },
   { id: "audit", label: "Audit Trail", icon: Gavel, description: "Immutable activity logs", permissions: ["audit:read"] },
@@ -303,6 +327,22 @@ function PanelContent({ panelId }) {
       return <UserManagementPanel />;
     case "audit":
       return <AuditPanel />;
+    case "stats":
+      return <StatsPanel />;
+    case "locations":
+      return <LocationsPanel />;
+    case "workflow":
+      return <WorkflowPanel />;
+    case "achievements":
+      return <AchievementsPanel />;
+    case "faq":
+      return <FaqPanel />;
+    case "rti":
+      return <RtiPanel />;
+    case "education":
+      return <EducationPanel />;
+    case "watertoday":
+      return <WaterTodayPanel />;
     default:
       return (
         <div className="mt-6 grid gap-4 md:grid-cols-2">
