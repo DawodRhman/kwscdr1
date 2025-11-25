@@ -17,7 +17,7 @@ const FALLBACK_STEPS = [
         id: "01",
         title: "Bulk Water Supply & Treatment",
         summary:
-            "Managing the abstraction of raw water from primary sources (Indus River, Hub Dam), operating massive pumping systems, and treating water to potable standards for the entire metropolitan area.",
+            "Managing abstraction of raw water, pumping systems, and treatment operations.",
         theme: "cyan",
     },
     {
@@ -49,7 +49,9 @@ function normalizeSteps(steps) {
         const Icon = ICON_SET[index % ICON_SET.length];
         const themeKey = step.theme && THEME_CLASSES[step.theme] ? step.theme : FALLBACK_STEPS[index % FALLBACK_STEPS.length]?.theme || "blue";
         return {
-            id: step.id || String(index + 1).padStart(2, "0"),
+            // Always use the index for the display ID (01, 02, etc.) to avoid showing UUIDs
+            id: String(index + 1).padStart(2, "0"),
+            originalId: step.id, // Keep the real ID if needed
             title: step.title,
             subTitle: step.summary || step.description || "",
             Icon,

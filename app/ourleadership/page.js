@@ -1,9 +1,27 @@
-"use client";
 import React from "react";
 import Image from "next/image";
 import { Globe } from "lucide-react";
+import prisma from "@/lib/prisma";
 
-export default function Leadership() {
+export const revalidate = 3600; // Revalidate every hour by default
+
+async function getLeadershipData() {
+  const members = await prisma.leadershipMember.findMany({
+    orderBy: { priority: "asc" },
+    include: { portrait: true },
+  });
+
+  // Separate into current and past (assuming logic or just showing all as current for now based on schema)
+  // The schema doesn't strictly distinguish "past" vs "current" with a flag, 
+  // but we can assume all active records are "Current" for this implementation 
+  // unless we add a status field later.
+  return members;
+}
+
+export default async function Leadership() {
+  const members = await getLeadershipData();
+
+  // Fallback/Static data for "Past Leaders" since it might not be in DB yet
   const pastLeaders = [
     {
       name: "Engr. Syed Najib Ahmed",
@@ -22,29 +40,6 @@ export default function Leadership() {
       role: "Former Managing Director",
       period: "2018 - 2020",
       img: "/leaders/hashim.svg",
-    },
-  ];
-
-  const managementTeam = [
-    {
-      name: "Ahmed Ali Siddiqui",
-      role: "Managing Director",
-      img: "/leaders/salahuddin.svg",
-    },
-    {
-      name: "Asadullah Khan",
-      role: "Chief Operating Officer",
-      img: "/leaders/imran.svg",
-    },
-    {
-      name: "Muhammad Ali Sheikh",
-      role: "Chief Engineer Water Supply",
-      img: "/leaders/sarah.svg",
-    },
-    {
-      name: "Aftab Alam Chandio",
-      role: "Chief Engineer Sewerage",
-      img: "/leaders/bilal.svg",
     },
   ];
 
@@ -97,25 +92,29 @@ export default function Leadership() {
               Current Management Team
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
-              {managementTeam.map((member, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all"
-                >
-                  <div className="w-full h-48 relative mb-4">
-                    <Image
-                      src={member.img}
-                      alt={member.name}
-                      fill
-                      className="object-cover rounded-xl"
-                    />
+            {members.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
+                {members.map((member) => (
+                  <div
+                    key={member.id}
+                    className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-xl transition-all"
+                  >
+                    <div className="w-full h-48 relative mb-4">
+                      <Image
+                        src={member.portrait?.url || "/placeholder-user.jpg"}
+                        alt={member.name}
+                        fill
+                        className="object-cover rounded-xl"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-blue-800">{member.name}</h3>
+                    <p className="text-gray-600 mt-1">{member.designation}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-blue-800">{member.name}</h3>
-                  <p className="text-gray-600 mt-1">{member.role}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500">No leadership members found.</p>
+            )}
           </section>
 
           {/* PAST LEADERS */}

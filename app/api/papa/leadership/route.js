@@ -4,6 +4,7 @@ import { z, ZodError } from "zod";
 import prisma from "@/lib/prisma";
 import { purgeSnapshot } from "@/lib/cache";
 import { ensureAdminSession, AdminAuthError, handleAdminApiError } from "@/lib/auth/guard";
+import { revalidatePath } from "next/cache";
 
 const ENTITY_TYPE = z.enum(["member"]);
 
@@ -198,6 +199,7 @@ async function logAudit({ session, action, recordId, diff, request }) {
 
 async function purgeHomeSnapshot() {
   await purgeSnapshot(SnapshotModule.HOME).catch(() => null);
+  revalidatePath("/ourleadership"); // Force update the public page
 }
 
 async function parseActionPayload(request, schemaMap) {
