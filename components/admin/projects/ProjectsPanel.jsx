@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Loader2, Plus, RefreshCcw, Trash2, Image, Link2, Sparkles, Briefcase } from "lucide-react";
 import { useAdminProjects } from "@/hooks/useAdminProjects";
 import SeoFields, { createEmptySeoState, serializeSeoState } from "@/components/admin/seo/SeoFields";
-import MediaAssetSelect from "@/components/admin/media/MediaAssetSelect";
+import MediaPicker from "@/components/admin/media/MediaPicker";
 
 const STATUS_OPTIONS = ["PLANNED", "IN_PROGRESS", "COMPLETED", "ON_HOLD"];
 const createInitialProjectForm = () => ({
@@ -277,8 +277,9 @@ export default function ProjectsPanel() {
               <Input label="Hero Media URL" type="url" value={projectForm.mediaUrl} onChange={(e) => setProjectForm({ ...projectForm, mediaUrl: e.target.value })} placeholder="https://..." />
               
               <div className="space-y-1.5">
-                <span className="text-xs font-semibold text-slate-500">Hero Media Asset</span>
-                <MediaAssetSelect
+                <MediaPicker
+                  label="Hero Media Asset"
+                  category="projects"
                   value={projectForm.mediaId}
                   onChange={(assetId, asset) =>
                     setProjectForm((prev) => ({

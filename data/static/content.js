@@ -531,6 +531,17 @@ const mediaLeaders = [
   { name: "Muhammad Sohail", title: "Chief Engineer (M&E)", imageUrl: "/leaders/hasan.svg" }
 ];
 
+const mediaGallery = [
+  { title: "K-IV Project Site", caption: "Phase 1 construction progress", imageUrl: "/media/projects/kiv-phase.svg", mimeType: "image/svg+xml" },
+  { title: "Dhabeji Pumping Station", caption: "Main pumping machinery upgrade", imageUrl: "/media/projects/dhabeji.svg", mimeType: "image/svg+xml" },
+  { title: "Sewerage Rehabilitation", caption: "District East infrastructure overhaul", imageUrl: "/media/projects/sewerage-east.svg", mimeType: "image/svg+xml" },
+  { title: "Digital Command Center", caption: "Monitoring water distribution in real-time", imageUrl: "/media/news/smart-meters.svg", mimeType: "image/svg+xml" },
+  { title: "Water Testing Lab", caption: "Ensuring quality standards", imageUrl: "/media/news/hydro-testing.svg", mimeType: "image/svg+xml" },
+  { title: "Emergency Response", caption: "Rain emergency units deployment", imageUrl: "/media/news/storm-response.svg", mimeType: "image/svg+xml" },
+  { title: "Customer Care Center", caption: "24/7 helpline operations", imageUrl: "/media/news/digital-billing.svg", mimeType: "image/svg+xml" },
+  { title: "Gadani Bulk Supply", caption: "New pipeline installation", imageUrl: "/media/projects/gadani-scheme.svg", mimeType: "image/svg+xml" }
+];
+
 const coreValues = [
   { title: "Reliability", description: "Ensuring consistent water supply and efficient sewerage services across Karachi.", icon: "/icon/airdrop.png" },
   { title: "Community Focus", description: "Serving the citizens of Karachi with dedication and commitment to public welfare.", icon: "/icon/people.png" },
@@ -597,6 +608,7 @@ module.exports = {
   counters,
   workflow,
   mediaLeaders,
+  mediaGallery,
   coreValues,
   rtiDocuments,
   socialLinks

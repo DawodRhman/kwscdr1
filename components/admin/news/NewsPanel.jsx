@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { Loader2, Plus, RefreshCcw, Trash2, CalendarDays, Tag as TagIcon, Hash } from "lucide-react";
 import { useAdminNews } from "@/hooks/useAdminNews";
-import MediaAssetSelect from "@/components/admin/media/MediaAssetSelect";
+import MediaPicker from "@/components/admin/media/MediaPicker";
 
 const STATUS_OPTIONS = ["DRAFT", "SCHEDULED", "PUBLISHED", "ARCHIVED"];
 const INITIAL_CATEGORY = { title: "", slug: "", order: "" };
@@ -375,10 +375,9 @@ export default function NewsPanel() {
               <div className="space-y-3 pt-2 border-t border-slate-100">
                 <p className="text-xs font-semibold text-slate-500">Hero Media</p>
                 <Input label="Remote URL" type="url" value={articleForm.heroMediaUrl} onChange={(e) => setArticleForm({ ...articleForm, heroMediaUrl: e.target.value })} placeholder="https://..." />
-                <MediaAssetSelect
+                <MediaPicker
                   label="Or Select from Library"
-                  placeholder="Select media asset"
-                  helperText="Pick from the Media Library or paste an external URL above."
+                  category="news"
                   value={articleForm.heroMediaId}
                   onChange={(assetId, asset) =>
                     setArticleForm((prev) => ({

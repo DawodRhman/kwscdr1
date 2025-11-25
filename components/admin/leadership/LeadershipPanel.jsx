@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useAdminLeadership } from "@/hooks/useAdminLeadership";
 import SeoFields, { createEmptySeoState, serializeSeoState } from "@/components/admin/seo/SeoFields";
+import MediaPicker from "@/components/admin/media/MediaPicker";
 
 const SOCIAL_FIELDS = ["linkedin", "twitter", "email"];
 
@@ -398,7 +399,18 @@ export default function LeadershipPanel() {
               <Input label="Designation" value={createForm.designation} onChange={(e) => setCreateForm({ ...createForm, designation: e.target.value })} required />
               <TextArea label="Bio" value={createForm.bio} onChange={(e) => setCreateForm({ ...createForm, bio: e.target.value })} placeholder="1-2 sentences" />
               <Input label="Priority" type="number" value={createForm.priority} onChange={(e) => setCreateForm({ ...createForm, priority: e.target.value })} placeholder="0 renders first" />
-              <Input label="Portrait Media ID" value={createForm.mediaId} onChange={(e) => setCreateForm({ ...createForm, mediaId: e.target.value })} placeholder="Existing MediaAsset ID" />
+              
+              <MediaPicker
+                label="Portrait Image"
+                category="leadership"
+                value={createForm.mediaId}
+                onChange={(id, asset) => setCreateForm(prev => ({
+                    ...prev,
+                    mediaId: id,
+                    mediaUrl: asset ? asset.url : prev.mediaUrl
+                }))}
+                disabled={actionState.pending}
+              />
               <Input label="Or Remote Media URL" type="url" value={createForm.mediaUrl} onChange={(e) => setCreateForm({ ...createForm, mediaUrl: e.target.value })} placeholder="https://..." />
               
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 space-y-3">
@@ -433,7 +445,18 @@ export default function LeadershipPanel() {
               <Input label="Designation" value={updateForm.designation} onChange={(e) => setUpdateForm({ ...updateForm, designation: e.target.value })} disabled={!updateForm.memberId} required />
               <TextArea label="Bio" value={updateForm.bio} onChange={(e) => setUpdateForm({ ...updateForm, bio: e.target.value })} disabled={!updateForm.memberId} />
               <Input label="Priority" type="number" value={updateForm.priority} onChange={(e) => setUpdateForm({ ...updateForm, priority: e.target.value })} disabled={!updateForm.memberId} />
-              <Input label="Portrait Media ID" value={updateForm.mediaId} onChange={(e) => setUpdateForm({ ...updateForm, mediaId: e.target.value })} disabled={!updateForm.memberId} />
+              
+              <MediaPicker
+                label="Portrait Image"
+                category="leadership"
+                value={updateForm.mediaId}
+                onChange={(id, asset) => setUpdateForm(prev => ({
+                    ...prev,
+                    mediaId: id,
+                    mediaUrl: asset ? asset.url : prev.mediaUrl
+                }))}
+                disabled={!updateForm.memberId}
+              />
               <Input label="Or Remote Media URL" type="url" value={updateForm.mediaUrl} onChange={(e) => setUpdateForm({ ...updateForm, mediaUrl: e.target.value })} disabled={!updateForm.memberId} />
               
               <div className="flex items-center gap-2">

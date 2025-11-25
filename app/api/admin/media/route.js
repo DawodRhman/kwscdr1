@@ -8,7 +8,7 @@ import prisma from "@/lib/prisma";
 import { ensureAdminSession, AdminAuthError, handleAdminApiError } from "@/lib/auth/guard";
 import { describeBuffer, guessMimeType } from "@/lib/media/metadata";
 
-const ENTITY_TYPE = z.enum(["external", "metadata", "asset"]);
+const ENTITY_TYPE = z.enum(["external", "metadata", "asset", "album", "albumItem"]);
 const actionEnvelopeSchema = z.object({
   type: ENTITY_TYPE,
   payload: z.unknown(),
@@ -20,6 +20,18 @@ const createSchemas = {
     category: z.string().trim().optional(),
     altText: z.string().trim().optional().nullable(),
   }),
+  album: z.object({
+    title: z.string().min(1),
+    slug: z.string().min(1),
+    description: z.string().optional(),
+    seo: z.any().optional(), // We'll handle SEO serialization manually or loosely
+  }),
+  albumItem: z.object({
+    albumId: z.string().min(1),
+    mediaId: z.string().min(1),
+    caption: z.string().optional(),
+    order: z.number().optional(),
+  }),
 };
 const updateSchemas = {
   metadata: z.object({
@@ -28,9 +40,18 @@ const updateSchemas = {
     category: z.string().trim().optional(),
     altText: z.string().trim().optional().nullable(),
   }),
+  album: z.object({
+    id: z.string().min(1),
+    title: z.string().optional(),
+    slug: z.string().optional(),
+    description: z.string().optional(),
+    seo: z.any().optional(),
+  }),
 };
 const deleteSchemas = {
   asset: z.object({ id: z.string().min(1) }),
+  album: z.object({ id: z.string().min(1) }),
+  albumItem: z.object({ id: z.string().min(1) }),
 };
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
@@ -39,7 +60,17 @@ async function fetchLibraryPayload() {
   const assets = await prisma.mediaAsset.findMany({
     orderBy: { createdAt: "desc" },
   });
-  return { assets };
+  const albums = await prisma.mediaAlbum.findMany({
+    include: {
+      items: {
+        include: { media: true },
+        orderBy: { order: "asc" },
+      },
+      seo: true,
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  return { assets, albums };
 }
 
 async function parseJsonPayload(request, schemaMap) {
@@ -170,6 +201,30 @@ export async function POST(request) {
           await logAudit({ session, action: "MEDIA_EXTERNAL_CREATE", recordId: record.id });
           break;
         }
+        case "album": {
+          record = await prisma.mediaAlbum.create({
+            data: {
+              title: data.title,
+              slug: data.slug,
+              description: data.description,
+              seo: data.seo ? { create: data.seo } : undefined,
+            },
+          });
+          await logAudit({ session, action: "ALBUM_CREATE", recordId: record.id });
+          break;
+        }
+        case "albumItem": {
+          record = await prisma.mediaItem.create({
+            data: {
+              albumId: data.albumId,
+              mediaId: data.mediaId,
+              caption: data.caption,
+              order: data.order || 0,
+            },
+          });
+          await logAudit({ session, action: "ALBUM_ITEM_ADD", recordId: record.id });
+          break;
+        }
         default:
           throw createHttpError("Unsupported entity type", 400);
       }
@@ -202,6 +257,24 @@ export async function PATCH(request) {
         await logAudit({ session, action: "MEDIA_UPDATE", recordId: data.id });
         break;
       }
+      case "album": {
+        const updates = {
+          title: data.title,
+          slug: data.slug,
+          description: data.description,
+        };
+        if (data.seo) {
+          updates.seo = {
+            upsert: {
+              create: data.seo,
+              update: data.seo,
+            },
+          };
+        }
+        record = await prisma.mediaAlbum.update({ where: { id: data.id }, data: updates });
+        await logAudit({ session, action: "ALBUM_UPDATE", recordId: data.id });
+        break;
+      }
       default:
         throw createHttpError("Unsupported entity type", 400);
     }
@@ -216,18 +289,30 @@ export async function DELETE(request) {
   try {
     const session = await ensureAdminSession("media:write");
     const { type, data } = await parseJsonPayload(request, deleteSchemas);
-    if (type !== "asset") {
+    
+    if (type === "asset") {
+      const existing = await prisma.mediaAsset.findUnique({ where: { id: data.id } });
+      if (!existing) {
+        throw createHttpError("Asset not found", 404);
+      }
+      await prisma.mediaAsset.delete({ where: { id: data.id } });
+      await deleteLocalFile(existing.url);
+      await logAudit({ session, action: "MEDIA_DELETE", recordId: data.id });
+      const payload = await fetchLibraryPayload();
+      return NextResponse.json({ data: payload, record: existing });
+    } else if (type === "album") {
+      await prisma.mediaAlbum.delete({ where: { id: data.id } });
+      await logAudit({ session, action: "ALBUM_DELETE", recordId: data.id });
+      const payload = await fetchLibraryPayload();
+      return NextResponse.json({ data: payload });
+    } else if (type === "albumItem") {
+      await prisma.mediaItem.delete({ where: { id: data.id } });
+      await logAudit({ session, action: "ALBUM_ITEM_DELETE", recordId: data.id });
+      const payload = await fetchLibraryPayload();
+      return NextResponse.json({ data: payload });
+    } else {
       throw createHttpError("Unsupported entity type", 400);
     }
-    const existing = await prisma.mediaAsset.findUnique({ where: { id: data.id } });
-    if (!existing) {
-      throw createHttpError("Asset not found", 404);
-    }
-    await prisma.mediaAsset.delete({ where: { id: data.id } });
-    await deleteLocalFile(existing.url);
-    await logAudit({ session, action: "MEDIA_DELETE", recordId: data.id });
-    const payload = await fetchLibraryPayload();
-    return NextResponse.json({ data: payload, record: existing });
   } catch (error) {
     return handleKnownErrors(error, "DELETE /api/admin/media");
   }

@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const API_ROUTE = "/api/admin/media";
-const EMPTY = { assets: [] };
+const EMPTY = { assets: [], albums: [] };
 
 function parseErrorPayload(payload, fallback) {
   if (!payload) return fallback;
@@ -116,8 +116,31 @@ export function useAdminMediaLibrary() {
     [submitJson]
   );
 
+  // Album methods
+  const createAlbum = useCallback(
+    (payload) => submitJson("POST", "album", payload),
+    [submitJson]
+  );
+  const updateAlbum = useCallback(
+    (payload) => submitJson("PATCH", "album", payload),
+    [submitJson]
+  );
+  const deleteAlbum = useCallback(
+    (payload) => submitJson("DELETE", "album", payload),
+    [submitJson]
+  );
+  const addAlbumItem = useCallback(
+    (payload) => submitJson("POST", "albumItem", payload),
+    [submitJson]
+  );
+  const removeAlbumItem = useCallback(
+    (payload) => submitJson("DELETE", "albumItem", payload),
+    [submitJson]
+  );
+
   return {
-    assets: data.assets,
+    assets: data.assets || [],
+    albums: data.albums || [],
     loading,
     error,
     lastFetchedAt,
@@ -127,5 +150,10 @@ export function useAdminMediaLibrary() {
     createExternalAsset,
     updateMetadata,
     deleteAsset,
+    createAlbum,
+    updateAlbum,
+    deleteAlbum,
+    addAlbumItem,
+    removeAlbumItem,
   };
 }

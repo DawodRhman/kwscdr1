@@ -27,7 +27,7 @@ export default async function Home() {
       <KWSCMap />
       <WorkFlow steps={homeData.workflow} />
       <Counter stats={homeData.counters} />
-      <MediaGallery leaders={homeData.mediaCarousel} />
+      <MediaGallery items={homeData.mediaCarousel} />
     </>
   );
 }
