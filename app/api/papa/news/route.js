@@ -327,7 +327,7 @@ export async function GET() {
     const data = await fetchNewsPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/news");
+    return handleKnownErrors(error, "GET /api/papa/news");
   }
 }
 
@@ -341,7 +341,7 @@ export async function POST(request) {
     const payload = await fetchNewsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/news");
+    return handleKnownErrors(error, "POST /api/papa/news");
   }
 }
 
@@ -355,7 +355,7 @@ export async function PATCH(request) {
     const payload = await fetchNewsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/news");
+    return handleKnownErrors(error, "PATCH /api/papa/news");
   }
 }
 
@@ -369,6 +369,6 @@ export async function DELETE(request) {
     const payload = await fetchNewsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/news");
+    return handleKnownErrors(error, "DELETE /api/papa/news");
   }
 }

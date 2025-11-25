@@ -165,7 +165,7 @@ export async function GET() {
     const data = await fetchSocialLinksPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/social-links");
+    return handleKnownErrors(error, "GET /api/papa/social-links");
   }
 }
 
@@ -179,7 +179,7 @@ export async function POST(request) {
     const payload = await fetchSocialLinksPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/social-links");
+    return handleKnownErrors(error, "POST /api/papa/social-links");
   }
 }
 
@@ -193,7 +193,7 @@ export async function PATCH(request) {
     const payload = await fetchSocialLinksPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/social-links");
+    return handleKnownErrors(error, "PATCH /api/papa/social-links");
   }
 }
 
@@ -207,6 +207,6 @@ export async function DELETE(request) {
     const payload = await fetchSocialLinksPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/social-links");
+    return handleKnownErrors(error, "DELETE /api/papa/social-links");
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/services";
+const API_ROUTE = "/api/papa/services";
 
 function parseErrorPayload(payload, fallback) {
   if (!payload) return fallback;

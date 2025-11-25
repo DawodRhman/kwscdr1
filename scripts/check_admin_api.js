@@ -1,7 +1,7 @@
 const fetch = global.fetch;
 
 async function login() {
-  const response = await fetch("http://localhost:3000/api/admin/auth/login", {
+  const response = await fetch("http://localhost:3000/api/papa/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ async function login() {
 }
 
 async function fetchServices(cookie) {
-  const response = await fetch("http://localhost:3000/api/admin/services", {
+  const response = await fetch("http://localhost:3000/api/papa/services", {
     headers: {
       cookie,
     },

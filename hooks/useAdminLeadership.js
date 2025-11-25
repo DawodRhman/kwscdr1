@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/leadership";
+const API_ROUTE = "/api/papa/leadership";
 const EMPTY_PAYLOAD = { members: [] };
 
 function parseErrorPayload(payload, fallback) {

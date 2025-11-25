@@ -86,6 +86,6 @@ export async function GET(request) {
       },
     });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/audit");
+    return handleKnownErrors(error, "GET /api/papa/audit");
   }
 }

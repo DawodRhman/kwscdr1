@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/social-links";
+const API_ROUTE = "/api/papa/social-links";
 const EMPTY_STATE = { links: [] };
 
 function parseErrorPayload(payload, fallback) {

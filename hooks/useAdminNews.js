@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/news";
+const API_ROUTE = "/api/papa/news";
 const EMPTY_PAYLOAD = { categories: [], tags: [], articles: [] };
 
 function parseErrorPayload(payload, fallback) {

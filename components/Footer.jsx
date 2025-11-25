@@ -14,7 +14,7 @@ const footer_data = {
 
 const Footer = () => {
   const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) {
+  if (pathname?.startsWith("/papa")) {
     return null;
   }
 

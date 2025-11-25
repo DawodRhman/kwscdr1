@@ -348,7 +348,7 @@ export async function GET() {
     const data = await fetchTenderPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/tenders");
+    return handleKnownErrors(error, "GET /api/papa/tenders");
   }
 }
 
@@ -362,7 +362,7 @@ export async function POST(request) {
     const payload = await fetchTenderPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/tenders");
+    return handleKnownErrors(error, "POST /api/papa/tenders");
   }
 }
 
@@ -376,7 +376,7 @@ export async function PATCH(request) {
     const payload = await fetchTenderPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/tenders");
+    return handleKnownErrors(error, "PATCH /api/papa/tenders");
   }
 }
 
@@ -390,6 +390,6 @@ export async function DELETE(request) {
     const payload = await fetchTenderPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/tenders");
+    return handleKnownErrors(error, "DELETE /api/papa/tenders");
   }
 }

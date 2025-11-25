@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/projects";
+const API_ROUTE = "/api/papa/projects";
 const EMPTY_PAYLOAD = { projects: [] };
 
 function parseErrorPayload(payload, fallback) {

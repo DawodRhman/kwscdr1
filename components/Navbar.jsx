@@ -13,7 +13,7 @@ const Navbar = () => {
   const linksRef = useRef([]);
   const submenuRefs = useRef([]);
   const pathname = usePathname(); 
-  const isAdminView = pathname?.startsWith("/admin");
+  const isAdminView = pathname?.startsWith("/papa");
 
   if (isAdminView) {
     return null;

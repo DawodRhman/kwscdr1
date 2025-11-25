@@ -299,7 +299,7 @@ export async function GET() {
     const data = await fetchProjectsPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/projects");
+    return handleKnownErrors(error, "GET /api/papa/projects");
   }
 }
 
@@ -313,7 +313,7 @@ export async function POST(request) {
     const payload = await fetchProjectsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/projects");
+    return handleKnownErrors(error, "POST /api/papa/projects");
   }
 }
 
@@ -327,7 +327,7 @@ export async function PATCH(request) {
     const payload = await fetchProjectsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/projects");
+    return handleKnownErrors(error, "PATCH /api/papa/projects");
   }
 }
 
@@ -341,6 +341,6 @@ export async function DELETE(request) {
     const payload = await fetchProjectsPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/projects");
+    return handleKnownErrors(error, "DELETE /api/papa/projects");
   }
 }

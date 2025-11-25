@@ -150,7 +150,7 @@ export async function GET() {
     const data = await fetchLibraryPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/media");
+    return handleKnownErrors(error, "GET /api/papa/media");
   }
 }
 
@@ -232,7 +232,7 @@ export async function POST(request) {
     const data = await fetchLibraryPayload();
     return NextResponse.json({ data, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/media");
+    return handleKnownErrors(error, "POST /api/papa/media");
   }
 }
 
@@ -281,7 +281,7 @@ export async function PATCH(request) {
     const payload = await fetchLibraryPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/media");
+    return handleKnownErrors(error, "PATCH /api/papa/media");
   }
 }
 
@@ -314,6 +314,6 @@ export async function DELETE(request) {
       throw createHttpError("Unsupported entity type", 400);
     }
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/media");
+    return handleKnownErrors(error, "DELETE /api/papa/media");
   }
 }

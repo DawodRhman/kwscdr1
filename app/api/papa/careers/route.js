@@ -319,7 +319,7 @@ export async function GET() {
     const data = await fetchCareerPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/careers");
+    return handleKnownErrors(error, "GET /api/papa/careers");
   }
 }
 
@@ -333,7 +333,7 @@ export async function POST(request) {
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/careers");
+    return handleKnownErrors(error, "POST /api/papa/careers");
   }
 }
 
@@ -347,7 +347,7 @@ export async function PATCH(request) {
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/careers");
+    return handleKnownErrors(error, "PATCH /api/papa/careers");
   }
 }
 
@@ -361,6 +361,6 @@ export async function DELETE(request) {
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/careers");
+    return handleKnownErrors(error, "DELETE /api/papa/careers");
   }
 }

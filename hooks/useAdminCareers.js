@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/careers";
+const API_ROUTE = "/api/papa/careers";
 const EMPTY_PAYLOAD = { programs: [], openings: [] };
 
 function parseErrorPayload(payload, fallback) {

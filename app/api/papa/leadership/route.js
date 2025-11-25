@@ -318,7 +318,7 @@ export async function GET() {
     const data = await fetchLeadershipPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/leadership");
+    return handleKnownErrors(error, "GET /api/papa/leadership");
   }
 }
 
@@ -332,7 +332,7 @@ export async function POST(request) {
     const payload = await fetchLeadershipPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/leadership");
+    return handleKnownErrors(error, "POST /api/papa/leadership");
   }
 }
 
@@ -346,7 +346,7 @@ export async function PATCH(request) {
     const payload = await fetchLeadershipPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/leadership");
+    return handleKnownErrors(error, "PATCH /api/papa/leadership");
   }
 }
 
@@ -360,6 +360,6 @@ export async function DELETE(request) {
     const payload = await fetchLeadershipPayload();
     return NextResponse.json({ data: payload, record });
   } catch (error) {
-    return handleKnownErrors(error, "DELETE /api/admin/leadership");
+    return handleKnownErrors(error, "DELETE /api/papa/leadership");
   }
 }

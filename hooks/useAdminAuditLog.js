@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/audit";
+const API_ROUTE = "/api/papa/audit";
 
 const createDefaultFilters = () => ({ module: "", actor: "" });
 

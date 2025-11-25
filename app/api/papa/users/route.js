@@ -143,7 +143,7 @@ export async function GET() {
     const data = await fetchUsersPayload();
     return NextResponse.json({ data });
   } catch (error) {
-    return handleKnownErrors(error, "GET /api/admin/users");
+    return handleKnownErrors(error, "GET /api/papa/users");
   }
 }
 
@@ -176,7 +176,7 @@ export async function POST(request) {
       temporaryPassword,
     });
   } catch (error) {
-    return handleKnownErrors(error, "POST /api/admin/users");
+    return handleKnownErrors(error, "POST /api/papa/users");
   }
 }
 
@@ -220,6 +220,6 @@ export async function PATCH(request) {
     const payload = await fetchUsersPayload();
     return NextResponse.json({ data: payload, record: result || null });
   } catch (error) {
-    return handleKnownErrors(error, "PATCH /api/admin/users");
+    return handleKnownErrors(error, "PATCH /api/papa/users");
   }
 }

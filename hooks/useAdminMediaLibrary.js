@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
-const API_ROUTE = "/api/admin/media";
+const API_ROUTE = "/api/papa/media";
 const EMPTY = { assets: [], albums: [] };
 
 function parseErrorPayload(payload, fallback) {

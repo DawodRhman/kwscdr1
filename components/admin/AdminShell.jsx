@@ -131,7 +131,7 @@ export default function AdminShell({ session, dashboardStats }) {
 
   const handleSignOut = async () => {
     try {
-      await fetch("/api/admin/auth/logout", { method: "POST" });
+      await fetch("/api/papa/auth/logout", { method: "POST" });
     } finally {
       router.refresh();
     }

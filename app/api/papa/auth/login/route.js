@@ -106,7 +106,7 @@ export async function POST(request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("POST /api/admin/auth/login", error);
+    console.error("POST /api/papa/auth/login", error);
     return NextResponse.json({ error: "Unable to sign in." }, { status: 500 });
   }
 }
