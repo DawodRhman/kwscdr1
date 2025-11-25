@@ -3,6 +3,7 @@ import { SnapshotModule } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { resolveWithSnapshot } from "@/lib/cache";
 import { resolvePageSeo } from "@/lib/seo";
+import content from "@/data/static/content";
 
 const HERO_CONTENT = {
   title: "Contact KW&SC",
@@ -22,7 +23,7 @@ function buildMapEmbedUrl(latitude, longitude) {
 
 function serializeChannel(channel) {
   return {
-    id: channel.id,
+    id: channel.id || channel.label,
     label: channel.label,
     description: channel.description,
     phone: channel.phone,
@@ -33,7 +34,7 @@ function serializeChannel(channel) {
 
 function serializeOffice(office) {
   return {
-    id: office.id,
+    id: office.id || office.label,
     label: office.label,
     address: office.address,
     latitude: office.latitude,
@@ -50,10 +51,19 @@ export async function GET() {
     const { data, stale } = await resolveWithSnapshot(
       SnapshotModule.CONTACT,
       async () => {
-        const [channels, offices] = await Promise.all([
-          prisma.contactChannel.findMany({ orderBy: { createdAt: "asc" } }),
-          prisma.officeLocation.findMany({ orderBy: { createdAt: "asc" } }),
-        ]);
+        let channels = [];
+        let offices = [];
+        
+        try {
+          [channels, offices] = await Promise.all([
+            prisma.contactChannel.findMany({ orderBy: { createdAt: "asc" } }),
+            prisma.officeLocation.findMany({ orderBy: { createdAt: "asc" } }),
+          ]);
+        } catch (dbError) {
+           console.warn("⚠️ Database unreachable in contact API. Using fallback data.");
+           channels = content.contact?.channels || [];
+           offices = content.contact?.offices || [];
+        }
 
         const hero = HERO_CONTENT;
 
@@ -78,9 +88,18 @@ export async function GET() {
     return NextResponse.json({ data, meta: { stale } });
   } catch (error) {
     console.error("GET /api/contact", error);
-    return NextResponse.json(
-      { error: "Failed to load contact data" },
-      { status: 500 }
-    );
+    // Return fallback on total failure
+    const hero = HERO_CONTENT;
+    const channels = content.contact?.channels || [];
+    const offices = content.contact?.offices || [];
+    return NextResponse.json({ 
+        data: {
+          hero,
+          channels: channels.map(serializeChannel),
+          offices: offices.map(serializeOffice),
+          seo: null
+        }, 
+        meta: { stale: true } 
+    });
   }
 }
