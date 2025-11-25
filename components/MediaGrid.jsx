@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Play, X, Image as ImageIcon } from 'lucide-react';
+import { Play, X } from 'lucide-react';
 
 export default function MediaGrid({ items = [] }) {
     const [selectedItem, setSelectedItem] = useState(null);

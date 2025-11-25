@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { Loader2, Plus, RefreshCcw, Trash2, Layers, FileText, Link as LinkIcon } from "lucide-react";
+import { Loader2, Plus, RefreshCcw, Trash2, Layers, Link as LinkIcon } from "lucide-react";
 import { useAdminServices } from "@/hooks/useAdminServices";
 
 const INITIAL_CATEGORY = { title: "", summary: "", heroCopy: "", order: "" };

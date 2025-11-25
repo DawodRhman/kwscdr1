@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useAdminMediaLibrary } from "@/hooks/useAdminMediaLibrary";
-import { Image as ImageIcon, Video, Upload, Check, Loader2, X } from "lucide-react";
+import { Video, Upload, Loader2, X } from "lucide-react";
 
 function isVideo(asset) {
   return asset.mimeType?.startsWith("video/") || asset.url?.match(/\.(mp4|webm|ogg)$/i);

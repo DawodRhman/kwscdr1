@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { Loader2, Plus, RefreshCcw, Trash2, CalendarDays, Tag as TagIcon, Hash } from "lucide-react";
+import { Loader2, Plus, RefreshCcw, Trash2, CalendarDays, Tag as TagIcon } from "lucide-react";
 import { useAdminNews } from "@/hooks/useAdminNews";
 import MediaPicker from "@/components/admin/media/MediaPicker";
 
