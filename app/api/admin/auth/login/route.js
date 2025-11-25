@@ -37,6 +37,14 @@ export async function POST(request) {
       return NextResponse.json({ error: "Invalid credentials." }, { status: 401 });
     }
 
+    if (user.lockoutUntil && new Date() < user.lockoutUntil) {
+      const waitMinutes = Math.ceil((user.lockoutUntil - new Date()) / 60000);
+      return NextResponse.json(
+        { error: `Account locked. Try again in ${waitMinutes} minutes.` },
+        { status: 429 }
+      );
+    }
+
     let passwordValid = await verifyPassword(user.hashedPassword, password);
     if (!passwordValid && /^[a-f0-9]{64}$/i.test(user.hashedPassword)) {
       const legacyHash = crypto.createHash("sha256").update(password).digest("hex");
@@ -48,7 +56,32 @@ export async function POST(request) {
     }
 
     if (!passwordValid) {
+      const attempts = user.failedLoginAttempts + 1;
+      let lockoutUntil = null;
+
+      if (attempts >= 5) {
+        lockoutUntil = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+      }
+
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          failedLoginAttempts: attempts,
+          lockoutUntil,
+        },
+      });
+
       return NextResponse.json({ error: "Invalid credentials." }, { status: 401 });
+    }
+
+    if (user.failedLoginAttempts > 0 || user.lockoutUntil) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          failedLoginAttempts: 0,
+          lockoutUntil: null,
+        },
+      });
     }
 
     const ipAddress = getClientIp(request);

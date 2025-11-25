@@ -13,7 +13,7 @@ const POLICY_HINTS = [
 export default function AdminLoginCard() {
   const router = useRouter();
   const [form, setForm] = useState({
-    email: "admin@kwsc.local",
+    email: "",
     password: "",
     rememberDevice: false,
   });
@@ -81,7 +81,7 @@ export default function AdminLoginCard() {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20"
-              placeholder="admin@kwsc.gos.pk"
+              placeholder="username"
               required
             />
           </div>

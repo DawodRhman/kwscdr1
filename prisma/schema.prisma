@@ -84,6 +84,8 @@ model User {
   hashedPassword  String
   status          String            @default("ACTIVE")
   lastLoginAt     DateTime?
+  failedLoginAttempts Int           @default(0)
+  lockoutUntil    DateTime?
   adminNotes      String?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
