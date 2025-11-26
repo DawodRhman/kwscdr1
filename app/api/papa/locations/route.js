@@ -9,14 +9,14 @@ import { revalidatePath } from "next/cache";
 const createSchema = z.object({
   label: z.string().min(1),
   address: z.string().min(1),
-  latitude: z.coerce.number().optional(),
-  longitude: z.coerce.number().optional(),
-  phone: z.string().optional(),
-  email: z.union([z.string().email(), z.literal("")]).optional().nullable(),
-  hours: z.string().optional(),
-  seoTitle: z.string().optional(),
-  seoDescription: z.string().optional(),
-  seoKeywords: z.string().optional(),
+  latitude: z.coerce.number().nullable().optional(),
+  longitude: z.coerce.number().nullable().optional(),
+  phone: z.string().nullable().optional(),
+  email: z.union([z.string().email(), z.literal("")]).nullable().optional(),
+  hours: z.string().nullable().optional(),
+  seoTitle: z.string().nullable().optional(),
+  seoDescription: z.string().nullable().optional(),
+  seoKeywords: z.string().nullable().optional(),
 });
 
 const updateSchema = createSchema.partial().extend({

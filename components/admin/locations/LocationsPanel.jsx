@@ -100,11 +100,16 @@ export default function LocationsPanel() {
     try {
       const payload = {
         ...formData,
-        latitude: formData.latitude ? parseFloat(formData.latitude) : undefined,
-        longitude: formData.longitude ? parseFloat(formData.longitude) : undefined,
-        seoTitle: formData.seoTitle,
-        seoDescription: formData.seoDescription,
-        seoKeywords: formData.seoKeywords,
+        label: formData.label.trim(),
+        address: formData.address.trim(),
+        phone: formData.phone?.trim() || null,
+        email: formData.email?.trim() || null,
+        hours: formData.hours?.trim() || null,
+        latitude: formData.latitude ? parseFloat(formData.latitude) : null,
+        longitude: formData.longitude ? parseFloat(formData.longitude) : null,
+        seoTitle: formData.seoTitle?.trim() || null,
+        seoDescription: formData.seoDescription?.trim() || null,
+        seoKeywords: formData.seoKeywords?.trim() || null,
       };
 
       if (editingItem) {
@@ -120,9 +125,14 @@ export default function LocationsPanel() {
       if (res.ok) {
         setIsModalOpen(false);
         fetchLocations();
+      } else {
+        const err = await res.json();
+        console.error("Server error:", err);
+        alert("Failed to save location. Check console for details.");
       }
     } catch (error) {
       console.error("Failed to save location:", error);
+      alert("Failed to save location.");
     } finally {
       setIsSubmitting(false);
     }
