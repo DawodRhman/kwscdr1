@@ -4,6 +4,7 @@ import { z, ZodError } from "zod";
 import prisma from "@/lib/prisma";
 import { purgeSnapshot } from "@/lib/cache";
 import { ensureAdminSession, handleAdminApiError } from "@/lib/auth/guard";
+import { revalidatePath } from "next/cache";
 
 const createSchema = z.object({
   label: z.string().min(1),
@@ -63,6 +64,8 @@ export async function POST(request) {
     });
     
     await purgeSnapshot(SnapshotModule.CONTACT).catch(() => null);
+    revalidatePath("/contact");
+    revalidatePath("/");
     
     await prisma.auditLog.create({
       data: {
@@ -109,6 +112,8 @@ export async function PATCH(request) {
     });
 
     await purgeSnapshot(SnapshotModule.CONTACT).catch(() => null);
+    revalidatePath("/contact");
+    revalidatePath("/");
 
     await prisma.auditLog.create({
       data: {
@@ -136,6 +141,8 @@ export async function DELETE(request) {
     const record = await prisma.officeLocation.delete({ where: { id } });
 
     await purgeSnapshot(SnapshotModule.CONTACT).catch(() => null);
+    revalidatePath("/contact");
+    revalidatePath("/");
 
     await prisma.auditLog.create({
       data: {

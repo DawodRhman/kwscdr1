@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import { slugify } from "@/lib/string";
 import { purgeSnapshot } from "@/lib/cache";
 import { ensureAdminSession, AdminAuthError, handleAdminApiError } from "@/lib/auth/guard";
+import { revalidatePath } from "next/cache";
 
 const ENTITY_TYPE = z.enum(["program", "opening", "requirement"]);
 
@@ -329,6 +330,8 @@ export async function POST(request) {
     const { type, data } = await parseActionPayload(request, createSchemas);
     const { record } = await handleCreate(type, data);
     await purgeCareerSnapshot();
+    revalidatePath("/careers");
+    revalidatePath("/workwithus");
     await logAudit({ session, action: `${type.toUpperCase()}_CREATE`, recordId: record.id });
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });
@@ -343,6 +346,8 @@ export async function PATCH(request) {
     const { type, data } = await parseActionPayload(request, updateSchemas);
     const { record } = await handleUpdate(type, data);
     await purgeCareerSnapshot();
+    revalidatePath("/careers");
+    revalidatePath("/workwithus");
     await logAudit({ session, action: `${type.toUpperCase()}_UPDATE`, recordId: data.id });
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });
@@ -357,6 +362,8 @@ export async function DELETE(request) {
     const { type, data } = await parseActionPayload(request, deleteSchemas);
     const { record } = await handleDelete(type, data);
     await purgeCareerSnapshot();
+    revalidatePath("/careers");
+    revalidatePath("/workwithus");
     await logAudit({ session, action: `${type.toUpperCase()}_DELETE`, recordId: data.id });
     const payload = await fetchCareerPayload();
     return NextResponse.json({ data: payload, record });

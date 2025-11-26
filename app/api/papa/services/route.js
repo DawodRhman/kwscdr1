@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import { purgeSnapshot } from "@/lib/cache";
 import { slugify } from "@/lib/string";
 import { ensureAdminSession, handleAdminApiError, AdminAuthError } from "@/lib/auth/guard";
+import { revalidatePath } from "next/cache";
 
 const ENTITY_TYPE = z.enum(["category", "card", "detail", "resource"]);
 
@@ -414,6 +415,8 @@ export async function POST(request) {
     const { type, data } = await parseActionPayload(request, createSchemas);
     const { record, diff } = await handleCreate(type, data);
     await purgeServicesSnapshot();
+    revalidatePath("/ourservices");
+    revalidatePath("/");
     await logAudit({ session, action: `${type.toUpperCase()}_CREATE`, recordId: record.id, diff, request });
     const categories = await fetchServicesTree();
     return NextResponse.json({ data: categories, record });
@@ -428,6 +431,8 @@ export async function PATCH(request) {
     const { type, data } = await parseActionPayload(request, updateSchemas);
     const { record, diff } = await handleUpdate(type, data);
     await purgeServicesSnapshot();
+    revalidatePath("/ourservices");
+    revalidatePath("/");
     await logAudit({ session, action: `${type.toUpperCase()}_UPDATE`, recordId: data.id, diff, request });
     const categories = await fetchServicesTree();
     return NextResponse.json({ data: categories, record });
@@ -442,6 +447,8 @@ export async function DELETE(request) {
     const { type, data } = await parseActionPayload(request, deleteSchemas);
     const { record, diff } = await handleDelete(type, data);
     await purgeServicesSnapshot();
+    revalidatePath("/ourservices");
+    revalidatePath("/");
     await logAudit({ session, action: `${type.toUpperCase()}_DELETE`, recordId: data.id, diff, request });
     const categories = await fetchServicesTree();
     return NextResponse.json({ data: categories, record });
