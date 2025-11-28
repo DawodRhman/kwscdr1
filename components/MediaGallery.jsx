@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { ChevronRight, Play, Sun, Moon, X } from 'lucide-react';
+import { ChevronRight, Sun, Moon } from 'lucide-react';
 
 export default function MediaGallery({ items = [] }) {
     const [isDarkTheme, setIsDarkTheme] = useState(true);
-    const [selectedItem, setSelectedItem] = useState(null);
 
     const toggleTheme = () => setIsDarkTheme(prev => !prev);
 
@@ -34,11 +33,7 @@ export default function MediaGallery({ items = [] }) {
     };
     const t = isDarkTheme ? themeClasses.dark : themeClasses.light;
 
-    const isVideo = (item) => {
-        return item.mimeType?.startsWith('video/') || item.imageUrl?.match(/\.(mp4|webm|ogg)$/i);
-    };
-
-    // Carousel animation CSS
+    // ...existing code...
     useEffect(() => {
         const style = document.createElement("style");
         style.innerHTML = `
@@ -57,7 +52,7 @@ export default function MediaGallery({ items = [] }) {
         return () => document.head.removeChild(style);
     }, []);
 
-    const displayItems = items.length > 0 ? [...items, ...items, ...items, ...items] : [];
+    const displayItems = items.length > 0 ? [...items, ...items] : [];
 
     return (
         <section className={`${t.mainBg} py-8 sm:py-12 md:py-20 lg:py-28 xl:py-32 relative overflow-hidden transition-colors duration-500`}>
@@ -94,74 +89,25 @@ export default function MediaGallery({ items = [] }) {
                     {displayItems.map((item, index) => (
                         <div
                             key={index}
-                            onClick={() => setSelectedItem(item)}
-                            className={`flex-shrink-0 w-40 sm:w-56 md:w-72 lg:w-80 h-48 sm:h-56 md:h-72 lg:h-96 p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl border ${t.cardBg} shadow-lg transition-all duration-300 transform hover:-translate-y-2 ${t.hoverShadow} cursor-pointer group`}
+                            className={`flex-shrink-0 w-40 sm:w-56 md:w-72 lg:w-80 h-48 sm:h-56 md:h-72 lg:h-96 p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl border ${t.cardBg} shadow-lg transition-all duration-300 transform hover:-translate-y-2 ${t.hoverShadow}`}
                         >
-                            {isVideo(item) ? (
-                                <div className="w-full h-full bg-black flex items-center justify-center relative">
-                                    <video src={item.imageUrl} className="w-full h-full object-cover opacity-80" muted />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full group-hover:scale-110 transition-transform">
-                                            <Play size={24} className="text-white fill-white" />
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <img
-                                    src={item.imageUrl}
-                                    alt={item.name}
-                                    className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full mx-auto mb-2 sm:mb-3 md:mb-4 lg:mb-6 object-cover border-2 border-cyan-500/50 transition-colors duration-300"
-                                />
-                            )}
-                            {!isVideo(item) && (
-                                <>
-                                    <h3 className={`text-sm sm:text-base md:text-lg font-bold text-center mb-2 ${t.cardText} transition-colors duration-300`}>
-                                        {item.title}
-                                    </h3>
-                                    <p className={`text-xs sm:text-sm text-center ${t.cardTitle} transition-colors duration-300`}>
-                                        {item.title}
-                                    </p>
-                                </>
-                            )}
+                            <img
+                                src={item.imageUrl}
+                                alt={item.name}
+                                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full mx-auto mb-2 sm:mb-3 md:mb-4 lg:mb-6 object-cover border-2 border-cyan-500/50 transition-colors duration-300"
+                            />
+                            <h3 className={`text-sm sm:text-base md:text-lg font-bold text-center mb-2 ${t.cardText} transition-colors duration-300`}>
+                                {item.name || item.title}
+                            </h3>
+                            <p className={`text-xs sm:text-sm text-center ${t.cardTitle} transition-colors duration-300`}>
+                                {item.title}
+                            </p>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Lightbox Modal */}
-            {selectedItem && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-                    <button
-                        onClick={() => setSelectedItem(null)}
-                        className="absolute top-4 right-4 p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-                    >
-                        <X size={32} />
-                    </button>
-
-                    <div className="max-w-5xl w-full max-h-[90vh] flex flex-col items-center">
-                        <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden shadow-2xl border border-white/10">
-                            {isVideo(selectedItem) ? (
-                                <video
-                                    src={selectedItem.imageUrl}
-                                    controls
-                                    autoPlay
-                                    className="w-full h-full object-contain"
-                                />
-                            ) : (
-                                <img
-                                    src={selectedItem.imageUrl}
-                                    alt={selectedItem.name}
-                                    className="w-full h-full object-contain"
-                                />
-                            )}
-                        </div>
-                        <div className="mt-4 text-center">
-                            <h3 className="text-xl font-bold text-white">{selectedItem.name}</h3>
-                            {selectedItem.title && <p className="text-slate-400 mt-1">{selectedItem.title}</p>}
-                        </div>
-                    </div>
-                </div>
-            )}
+            {/* ...existing code... */}
 
             <div className="text-center mt-8 sm:mt-10 md:mt-12 lg:mt-16 z-10 relative">
                 <a

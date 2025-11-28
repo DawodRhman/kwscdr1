@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { FaTint, FaWater, FaTools, FaShieldAlt, FaChartLine, FaCogs, FaDatabase, FaPhone } from "react-icons/fa";
+import { FaTint } from "react-icons/fa";
 import Loader from "@/components/Loader";
 import gsap from "gsap";
 import { useServicesData } from "@/hooks/useServicesData";
@@ -24,38 +19,26 @@ export default function Services() {
       .to(".wrapper", { y: "-100%", ease: "power4.inOut", duration: 1 }, "-=0.8");
   }, []);
 
-  const iconMap = {
-    FaTint,
-    FaWater,
-    FaTools,
-    FaShieldAlt,
-    FaChartLine,
-    FaCogs,
-    FaDatabase,
-    FaPhone,
-  };
-
-  const heroTitle = data.hero?.title || "Our Services";
-  const heroSubtitle =
-    data.hero?.subtitle ||
-    "We provide a full range of water supply, sewerage, and infrastructure services to keep Karachi safe, clean, and sustainable.";
-
   const handleCardSelect = (card) => {
     setSelectedCard(card);
   };
 
   const closeOverlay = () => setSelectedCard(null);
-  const SelectedIcon = selectedCard ? iconMap[selectedCard.iconKey] || FaTint : null;
+  const SelectedIcon = selectedCard ? FaTint : null;
 
   return (
     <>
       {loading && <Loader />}
 
       {/* Corporate Section Header */}
-      <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">{heroTitle}</h1>
-          <p className="text-gray-600 text-lg md:text-xl">{heroSubtitle}</p>
+      <section className="bg-white py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+        <div className="max-w-4xl sm:max-w-5xl md:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+            {data.hero?.title || "Our Services"}
+          </h1>
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gray-600 max-w-2xl sm:max-w-3xl md:max-w-4xl mx-auto leading-relaxed sm:leading-relaxed md:leading-relaxed">
+            {data.hero?.subtitle || "KW&SC provides essential services to the citizens of Karachi, ensuring efficient water supply, sewerage management, and digital accessibility."}
+          </p>
           {error && (
             <p className="mt-4 text-sm text-red-500">Showing cached content due to a network issue. ({error.message})</p>
           )}
@@ -63,147 +46,102 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Detailed Sections */}
-      <section className="bg-gray-50 py-12">
-        <div className="max-w-6xl mx-auto px-6 space-y-16">
-          {data.categories?.length ? (
-            data.categories.map((category) => (
-              <div key={category.id} className="space-y-8">
-                <div className="text-center">
-                  <h2 className="text-3xl font-semibold text-gray-800">{category.title}</h2>
-                  {category.summary && <p className="text-gray-600 mt-3">{category.summary}</p>}
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  {(category.cards || []).slice(0, 2).map((card) => (
-                    <div key={card.id} className="bg-white rounded-xl shadow-md p-6">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-3">{card.title}</h3>
-                      <p className="text-gray-600 mb-3">{card.summary}</p>
-                      {card.details?.[0]?.bulletPoints && (
-                        <ul className="list-disc list-inside text-gray-600 space-y-1">
-                          {card.details[0].bulletPoints.map((point, idx) => (
-                            <li key={idx}>{point}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {category.resources?.length ? (
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {category.resources.map((resource) => (
-                      <div key={resource.id} className="bg-white rounded-xl shadow-md p-6">
-                        <h4 className="text-lg font-semibold text-blue-800 mb-2">{resource.title}</h4>
-                        {resource.description && <p className="text-gray-600 mb-3">{resource.description}</p>}
-                        <a
-                          href={resource.externalUrl || resource.media?.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold"
-                        >
-                          View Resource
-                          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500">Service data will appear here once available.</p>
-          )}
-        </div>
-      </section>
-
-      {/* Swiper / Card Services */}
-      <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Other Services</h2>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            slidesPerView={3}
-            spaceBetween={30}
-            autoplay={false}
-            breakpoints={{ 640: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-            navigation
-            pagination={{ clickable: true }}
-            className="pb-12"
-          >
-            {cards.map((service) => {
-              const Icon = iconMap[service.iconKey] || FaTint;
-              const key = service.id || service.title;
-              const description = service.summary || service.description || "Details coming soon.";
-              const gradientClass = service.gradientClass || "from-blue-100 to-blue-300";
-
-              return (
-                <SwiperSlide key={key}>
-                  <div
-                    className={`card h-[400px] p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 border border-gray-200 bg-gradient-to-br cursor-pointer ${gradientClass}`}
-                    onClick={() => handleCardSelect(service)}
-                    onKeyDown={(evt) => evt.key === "Enter" && handleCardSelect(service)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`View details for ${service.title}`}
-                  >
-                    <div className="flex flex-col items-center text-center justify-center h-full">
-                      <div className="text-5xl mb-4 text-gray-800">
-                        <Icon />
-                      </div>
-                      <h2 className="text-xl font-semibold mb-2 text-gray-900">{service.title}</h2>
-                      <p className="text-gray-700">{description}</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        </div>
-      </section>
-
-      {selectedCard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
-          <div className={`relative w-full max-w-3xl rounded-2xl p-8 text-white shadow-2xl bg-gradient-to-br ${selectedCard.gradientClass || "from-blue-600 to-indigo-700"}`}>
-            <button
-              type="button"
-              onClick={closeOverlay}
-              className="absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white transition hover:bg-white/25"
-              aria-label="Close service details"
-            >
-              ✕
-            </button>
-            <div className="flex flex-col items-center text-center gap-4">
-              <div className="text-5xl">
-                {SelectedIcon ? <SelectedIcon /> : <FaTint />}
-              </div>
-              <h3 className="text-3xl font-semibold">{selectedCard.title}</h3>
-              <p className="text-lg text-white/90 max-w-2xl">
-                {selectedCard.description || selectedCard.summary || "Detailed information will be published soon."}
+      {/* Services Section */}
+      <section className="bg-gray-50 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+        <div className="max-w-4xl sm:max-w-5xl md:max-w-6xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 space-y-8 sm:space-y-12 md:space-y-16 lg:space-y-20">
+          {/* Complaint Management */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-center">
+            <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-800">
+                Complaint Management
+              </h2>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 leading-relaxed sm:leading-relaxed md:leading-relaxed">
+                Citizens can register complaints regarding water supply issues,
+                sewerage problems, or service disruptions. KW&SC ensures timely
+                tracking and resolution of all complaints.
+              </p>
+              <ul className="list-disc list-inside text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 space-y-1 sm:space-y-1.5 md:space-y-2 pl-2 sm:pl-0">
+                <li>Register complaints online or via helpline</li>
+                <li>Track status of registered complaints</li>
+                <li>Timely resolution and escalation management</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-lg transition-shadow p-4 sm:p-5 md:p-6 lg:p-8">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 mb-2 sm:mb-3 md:mb-4">
+                Citizen Support
+              </h3>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 mb-2 leading-relaxed">
+                Dedicated team for resolving complaints efficiently and
+                maintaining service quality.
               </p>
             </div>
-            {selectedCard.details?.length ? (
-              <div className="mt-6 space-y-4">
-                {selectedCard.details.map((detail) => (
-                  <div key={detail.id || detail.heading} className="rounded-xl bg-white/10 p-4">
-                    <h4 className="text-xl font-semibold mb-2">{detail.heading}</h4>
-                    {detail.body && <p className="text-sm text-white/80">{detail.body}</p>}
-                    {Array.isArray(detail.bulletPoints) && detail.bulletPoints.length ? (
-                      <ul className="mt-3 list-disc list-inside text-sm text-white/80">
-                        {detail.bulletPoints.map((point, idx) => (
-                          <li key={`${detail.heading}-${idx}`}>{point}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                ))}
+          </div>
+
+          {/* Online Water Tanker Booking */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-center">
+            <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-800">
+                Online Tanker Booking
+              </h2>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 leading-relaxed sm:leading-relaxed md:leading-relaxed">
+                Book water tankers online for residential or commercial needs.
+                KW&SC manages scheduling, delivery, and ensures timely supply.
+              </p>
+              <ul className="list-disc list-inside text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 space-y-1 sm:space-y-1.5 md:space-y-2 pl-2 sm:pl-0">
+                <li>Online booking portal for citizens</li>
+                <li>Flexible delivery schedules</li>
+                <li>Real-time tracking of tankers</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-lg transition-shadow p-4 sm:p-5 md:p-6 lg:p-8">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 mb-2 sm:mb-3 md:mb-4">
+                Tanker Services
+              </h3>
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 mb-2 leading-relaxed">
+                Efficient management and monitoring of water tanker deliveries
+                across the city.
+              </p>
+            </div>
+          </div>
+
+          {/* New Connections */}
+          <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-800 text-center">
+              New Connection Services
+            </h2>
+            <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md hover:shadow-lg transition-shadow p-4 sm:p-5 md:p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+              <div>
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 mb-2 sm:mb-3 md:mb-4">
+                  Water & Sewerage Connections
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 mb-3 sm:mb-4 md:mb-5 leading-relaxed">
+                  Apply for new connections or modifications online. KW&SC
+                  streamlines approvals, installation, and activation.
+                </p>
+                <a
+                  href="https://www.kwsc.gos.pk/assets/documents/Connection-Guideline-RRG.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-xs sm:text-sm md:text-base lg:text-lg text-blue-600 hover:text-blue-800 font-semibold transition-colors hover:underline"
+                >
+                  View Connection Guidelines
+                </a>
               </div>
-            ) : null}
+              <div>
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 mb-2 sm:mb-3 md:mb-4">
+                  Efficient Approvals
+                </h3>
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 leading-relaxed">
+                  Fast processing of applications for residential and commercial
+                  connections to ensure uninterrupted service.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      )}
+      </section>
+
+      {/* ...existing code... */}
     </>
   );
 }
