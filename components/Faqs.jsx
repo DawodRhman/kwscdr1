@@ -89,29 +89,31 @@ export default function FAQs({ items }) {
   };
 
   return (
-    <section className="bg-gradient-to-br from-slate-50 to-blue-50 py-12 md:py-16 relative overflow-hidden" id="faq-slider">
+    <section
+      className="bg-gradient-to-br from-slate-50 to-blue-50 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 relative overflow-hidden"
+      id="faq-slider"
+    >
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-0 w-48 h-48 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-      <div className="absolute bottom-0 right-0 w-48 h-48 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      <div className="absolute top-0 left-0 w-32 sm:w-40 md:w-48 lg:w-64 h-32 sm:h-40 md:h-48 lg:h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute bottom-0 right-0 w-32 sm:w-40 md:w-48 lg:w-64 h-32 sm:h-40 md:h-48 lg:h-64 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        
+      <div className="max-w-4xl sm:max-w-5xl md:max-w-6xl lg:max-w-7xl 2xl:max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 relative z-10">
+
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-extrabold text-gray-900 tracking-tight">
             Common Questions
           </h2>
-          <p className="text-gray-500 mt-2 text-base">
+          <p className="text-gray-500 mt-2 sm:mt-3 md:mt-4 text-xs sm:text-sm md:text-base lg:text-lg">
             Quick answers to our most frequent inquiries.
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div className="max-w-3xl mx-auto">
-          <div className="relative bg-white rounded-2xl shadow-xl border border-white/50 backdrop-blur-sm min-h-[220px] md:min-h-[200px] flex items-center justify-center p-5 md:p-8 overflow-hidden">
-            
+        <div className="max-w-2xl sm:max-w-3xl md:max-w-3xl lg:max-w-4xl 2xl:max-w-5xl mx-auto">
+          <div className="relative bg-white rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-2xl shadow-md sm:shadow-lg md:shadow-xl border border-white/50 backdrop-blur-sm min-h-[180px] sm:min-h-[200px] md:min-h-[220px] lg:min-h-[240px] flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12 overflow-hidden">
             {/* Background Watermark Icon */}
-            <HelpCircle className="absolute -right-8 -bottom-8 w-32 h-32 text-gray-50 opacity-50 pointer-events-none" />
+            <HelpCircle className="absolute -right-4 sm:-right-6 md:-right-8 lg:-right-10 -bottom-4 sm:-bottom-6 md:-bottom-8 lg:-bottom-10 w-16 sm:w-20 md:w-24 lg:w-32 xl:w-40 2xl:w-48 h-16 sm:h-20 md:h-24 lg:h-32 xl:h-40 2xl:h-48 text-gray-50 opacity-50 pointer-events-none" />
 
             {/* AnimatePresence handles the slide transition */}
             <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -129,40 +131,40 @@ export default function FAQs({ items }) {
                 className="w-full text-center"
               >
                 {/* Category Badge */}
-                <span className="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="inline-block px-2 sm:px-3 md:px-4 lg:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-2 sm:mb-3 md:mb-4 lg:mb-4">
                   {faqs[currentIndex].category}
                 </span>
 
                 {/* Question */}
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 leading-snug">
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 lg:mb-5 leading-snug">
                   "{faqs[currentIndex].question}"
                 </h3>
 
                 {/* Answer */}
-                <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-base 2xl:text-base text-gray-600 leading-relaxed max-w-2xl mx-auto">
                   {faqs[currentIndex].answer}
                 </p>
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <button 
+            <button
               onClick={prevSlide}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-md text-gray-400 hover:text-blue-600 hover:scale-110 transition-all z-20 hidden md:block"
+              className="absolute left-1 sm:left-2 md:left-3 lg:left-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 md:p-2.5 lg:p-3 rounded-full bg-white shadow-md text-gray-400 hover:text-blue-600 hover:scale-110 transition-all z-20 hidden sm:block"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3 sm:w-3.5 md:w-4 lg:w-5 h-3 sm:h-3.5 md:h-4 lg:h-5" />
             </button>
 
-            <button 
+            <button
               onClick={nextSlide}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-md text-gray-400 hover:text-blue-600 hover:scale-110 transition-all z-20 hidden md:block"
+              className="absolute right-1 sm:right-2 md:right-3 lg:right-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 md:p-2.5 lg:p-3 rounded-full bg-white shadow-md text-gray-400 hover:text-blue-600 hover:scale-110 transition-all z-20 hidden sm:block"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3 sm:w-3.5 md:w-4 lg:w-5 h-3 sm:h-3.5 md:h-4 lg:h-5" />
             </button>
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-1.5 sm:gap-2 md:gap-2.5 lg:gap-3 mt-3 sm:mt-4 md:mt-5 lg:mt-6 xl:mt-7 2xl:mt-8">
             {faqs.map((_, index) => (
               <button
                 key={index}
@@ -170,9 +172,10 @@ export default function FAQs({ items }) {
                   setDirection(index > currentIndex ? 1 : -1);
                   setCurrentIndex(index);
                 }}
-                className={`h-2 transition-all duration-300 ${
-                  index === currentIndex ? "w-6 bg-blue-600 rounded-full" : "w-2 bg-gray-300 hover:bg-blue-300 rounded-full"
-                }`}
+                className={`h-1.5 sm:h-2 md:h-2 lg:h-2.5 transition-all duration-300 ${index === currentIndex
+                    ? "w-4 sm:w-5 md:w-6 lg:w-7 xl:w-8 bg-blue-600 rounded-full"
+                    : "w-1.5 sm:w-2 md:w-2.5 lg:w-3 bg-gray-300 hover:bg-blue-300 rounded-full"
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

@@ -57,28 +57,36 @@ export default function OurLeadership({ team, insights }) {
   const insightCards = Array.isArray(insights) && insights.length ? insights : FALLBACK_INSIGHTS;
 
   return (
-    <section className="w-full py-20 bg-gray-50" id="leadership-content">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-blue-900 mb-4">Leadership &amp; Management</h2>
-          <p className="text-gray-600 text-lg">
-            KW&SC has evolved under the guidance of exceptional leaders. Meet the visionaries guiding the corporation toward a
-            sustainable and efficient future.
+    <section
+      className="w-full py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32 bg-gray-50"
+      id="leadership-content"
+    >
+      <div className="max-w-4xl sm:max-w-5xl md:max-w-6xl lg:max-w-7xl 2xl:max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12">
+        {/* --- Section Header --- */}
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 xl:mb-20 2xl:mb-24 max-w-2xl sm:max-w-3xl md:max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 lg:mb-6">
+            Leadership & Management
+          </h2>
+          <p className="text-gray-600 text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg 2xl:text-lg">
+            KW&SC has evolved under the guidance of exceptional leaders. Meet
+            the visionaries guiding the corporation toward a sustainable and
+            efficient future.
           </p>
         </div>
 
-        <div className="mb-24">
-          <h3 className="text-2xl font-bold text-center text-gray-800 mb-10 uppercase tracking-wider border-b-2 border-blue-200 inline-block pb-2 px-4 mx-auto block w-fit">
+        {/* --- Current Management Team --- */}
+        <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24 xl:mb-28 2xl:mb-32">
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8 md:mb-10 lg:mb-12 uppercase tracking-wider border-b-2 border-blue-200 pb-2 px-3 sm:px-4 md:px-5 lg:px-6 w-fit mx-auto">
             Management Team
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 2xl:gap-10">
             {roster.map((member, index) => (
               <div
-                key={member.id || index}
-                className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                key={index}
+                className="group bg-white rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl overflow-hidden shadow-sm sm:shadow-md hover:shadow-lg md:hover:shadow-2xl transition-all duration-300 transform hover:scale-105 sm:hover:-translate-y-2"
               >
-                <div className="relative w-full h-64 bg-gray-200">
+                <div className="relative w-full h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 2xl:h-80 bg-gray-200">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -90,29 +98,20 @@ export default function OurLeadership({ team, insights }) {
                       event.currentTarget.src = PLACEHOLDER_PORTRAIT;
                     }}
                   />
+                  {/* Overlay Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <div className="p-6 text-center relative">
-                  <h4 className="text-lg font-bold text-blue-900 group-hover:text-blue-600 transition-colors">{member.name}</h4>
-                  <p className="text-sm text-gray-500 font-medium mt-1">{member.role}</p>
-                  {member.bio ? <p className="text-xs text-gray-500 mt-3 line-clamp-3">{member.bio}</p> : null}
+                <div className="p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7 2xl:p-8 text-center relative">
+                  <h4 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-2xl font-bold text-blue-900 group-hover:text-blue-600 transition-colors leading-tight">
+                    {member.name}
+                  </h4>
+                  <p className="text-xs sm:text-xs md:text-sm lg:text-base xl:text-base 2xl:text-base text-gray-500 font-medium mt-1 sm:mt-1.5 md:mt-2 lg:mt-3">
+                    {member.role}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {insightCards.map((insight, index) => (
-            <div
-              key={insight.title || index}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-blue-100 hover:border-blue-300 transition-colors"
-            >
-              <p className="text-xs font-semibold tracking-[0.3em] text-blue-400 mb-3">INSIGHT {index + 1}</p>
-              <h4 className="text-xl font-bold text-blue-900 mb-2">{insight.title}</h4>
-              <p className="text-gray-600 leading-relaxed text-sm">{insight.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
