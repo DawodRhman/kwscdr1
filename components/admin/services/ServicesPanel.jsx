@@ -320,10 +320,10 @@ export default function ServicesPanel() {
       <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
         <section className="space-y-6">
           <div className="flex items-center justify-between">
-             <h3 className="text-lg font-semibold text-slate-900">Service Hierarchy</h3>
-             <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
-               {categories.length} Categories
-             </span>
+            <h3 className="text-lg font-semibold text-slate-900">Service Hierarchy</h3>
+            <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
+              {categories.length} Categories
+            </span>
           </div>
 
           {loading ? (
@@ -381,49 +381,49 @@ export default function ServicesPanel() {
                         {category.cards.map((card) => (
                           <div key={card.id} className="rounded-xl border border-slate-100 bg-slate-50 p-4">
                             <div className="flex justify-between items-start mb-2">
-                               <h6 className="font-medium text-slate-900">{card.title}</h6>
-                               <div className="flex items-center gap-1">
-                                 <button
-                                    type="button"
-                                    onClick={() => handleCardSelectForEdit(card.id)}
-                                    className="text-slate-400 hover:text-blue-600 rounded-md p-1"
-                                    title="Edit Card"
-                                  >
-                                    <Pencil size={14} />
-                                  </button>
-                                 <button
-                                    onClick={() => handleDelete("card", card.id, card.title)}
-                                    className="text-slate-400 hover:text-rose-500 rounded-md p-1"
-                                  >
-                                    <Trash2 size={14} />
-                                  </button>
-                               </div>
+                              <h6 className="font-medium text-slate-900">{card.title}</h6>
+                              <div className="flex items-center gap-1">
+                                <button
+                                  type="button"
+                                  onClick={() => handleCardSelectForEdit(card.id)}
+                                  className="text-slate-400 hover:text-blue-600 rounded-md p-1"
+                                  title="Edit Card"
+                                >
+                                  <Pencil size={14} />
+                                </button>
+                                <button
+                                  onClick={() => handleDelete("card", card.id, card.title)}
+                                  className="text-slate-400 hover:text-rose-500 rounded-md p-1"
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
                             </div>
                             {card.summary && <p className="text-xs text-slate-500 mb-3 line-clamp-2">{card.summary}</p>}
-                            
+
                             {card.details?.length > 0 && (
-                               <div className="space-y-1 border-t border-slate-200 pt-2">
-                                  {card.details.map((detail) => (
-                                    <div key={detail.id} className="flex items-center justify-between text-xs group">
-                                       <span className="text-slate-600 truncate pr-2">- {detail.heading}</span>
-                                       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
-                                         <button
-                                            type="button"
-                                            onClick={() => handleDetailSelectForEdit(detail.id)}
-                                            className="text-slate-400 hover:text-blue-600"
-                                          >
-                                            <Pencil size={10} />
-                                          </button>
-                                         <button
-                                            onClick={() => handleDelete("detail", detail.id, detail.heading)}
-                                            className="text-slate-400 hover:text-rose-500"
-                                         >
-                                            <Trash2 size={10} />
-                                         </button>
-                                       </div>
+                              <div className="space-y-1 border-t border-slate-200 pt-2">
+                                {card.details.map((detail) => (
+                                  <div key={detail.id} className="flex items-center justify-between text-xs group">
+                                    <span className="text-slate-600 truncate pr-2">- {detail.heading}</span>
+                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+                                      <button
+                                        type="button"
+                                        onClick={() => handleDetailSelectForEdit(detail.id)}
+                                        className="text-slate-400 hover:text-blue-600"
+                                      >
+                                        <Pencil size={10} />
+                                      </button>
+                                      <button
+                                        onClick={() => handleDelete("detail", detail.id, detail.heading)}
+                                        className="text-slate-400 hover:text-rose-500"
+                                      >
+                                        <Trash2 size={10} />
+                                      </button>
                                     </div>
-                                  ))}
-                               </div>
+                                  </div>
+                                ))}
+                              </div>
                             )}
                           </div>
                         ))}
