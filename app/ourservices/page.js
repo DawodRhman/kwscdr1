@@ -9,8 +9,6 @@ import { FaTint, FaWater, FaTools, FaShieldAlt, FaChartLine, FaCogs, FaDatabase,
 import gsap from "gsap";
 import Loader from "@/components/Loader";
 import { useServicesData } from "@/hooks/useServicesData";
-let arr2 = [];
-let arr3 = new Set(arr2)
 const ICON_MAP = {
   FaTint,
   FaWater,
