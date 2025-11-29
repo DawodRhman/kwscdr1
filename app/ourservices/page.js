@@ -9,7 +9,8 @@ import { FaTint, FaWater, FaTools, FaShieldAlt, FaChartLine, FaCogs, FaDatabase,
 import gsap from "gsap";
 import Loader from "@/components/Loader";
 import { useServicesData } from "@/hooks/useServicesData";
-
+let arr2 = [];
+let arr3 = new Set(arr2)
 const ICON_MAP = {
   FaTint,
   FaWater,
@@ -87,20 +88,20 @@ export default function Services() {
           </header>
           {data.categories?.length ? (
             data.categories.map((category) => (
-              <div key={category.id} className="mb-16">
-                <h2 className="text-3xl font-bold text-center mb-4 text-blue-900">{category.title}</h2>
-                {category.summary && <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8">{category.summary}</p>}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div key={category.id} className="mb-12 sm:mb-16 md:mb-20 lg:mb-24 xl:mb-28 2xl:mb-32">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-blue-900">{category.title}</h2>
+                {category.summary && <p className="text-gray-600 text-center max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-14 text-xs sm:text-sm md:text-base lg:text-lg">{category.summary}</p>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 mb-8 sm:mb-10 md:mb-12 lg:mb-14">
                   {(category.cards || []).map((card) => (
-                    <div key={card.id} className="bg-white rounded-xl shadow-lg p-8">
-                      <h3 className="text-xl font-bold mb-3 text-blue-800">{card.title}</h3>
-                      <p className="text-gray-600 mb-4">{card.summary || card.description}</p>
+                    <div key={card.id} className="bg-white rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-14">
+                      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 text-blue-800">{card.title}</h3>
+                      <p className="text-gray-600 mb-3 sm:mb-4 md:mb-4 text-xs sm:text-sm md:text-base">{card.summary || card.description}</p>
                       {(card.details || []).map((detail) => (
                         <div key={detail.id} className="mt-4 border-t border-gray-100 pt-4">
-                          <h4 className="text-lg font-semibold text-gray-900">{detail.heading}</h4>
-                          {detail.body && <p className="text-gray-600 mt-2">{detail.body}</p>}
+                          <h4 className="text-sm sm:text-base md:text-lg font-semibold text-gray-900">{detail.heading}</h4>
+                          {detail.body && <p className="text-gray-600 mt-2 text-xs sm:text-sm md:text-base">{detail.body}</p>}
                           {Array.isArray(detail.bulletPoints) && detail.bulletPoints.length ? (
-                            <ul className="mt-3 space-y-1 text-gray-600">
+                            <ul className="mt-3 space-y-1 text-gray-600 text-xs sm:text-sm md:text-base">
                               {detail.bulletPoints.map((point, idx) => (
                                 <li key={`${detail.id}-bp-${idx}`}>• {point}</li>
                               ))}
@@ -110,21 +111,22 @@ export default function Services() {
                       ))}
                     </div>
                   ))}
+
                 </div>
                 {category.resources?.length ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14">
                     {category.resources.map((resource) => (
-                      <div key={resource.id} className="bg-white rounded-xl shadow-lg p-8">
-                        <h4 className="text-lg font-semibold text-blue-800 mb-2">{resource.title}</h4>
-                        {resource.description && <p className="text-gray-600 mb-3">{resource.description}</p>}
+                      <div key={resource.id} className="bg-white rounded-lg sm:rounded-xl md:rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-14">
+                        <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 text-blue-800">{resource.title}</h4>
+                        {resource.description && <p className="text-gray-600 mb-3 sm:mb-4 md:mb-4 text-xs sm:text-sm md:text-base">{resource.description}</p>}
                         <a
                           href={resource.externalUrl || resource.media?.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold"
+                          className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-xs sm:text-sm md:text-base"
                         >
                           View Resource
-                          <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 sm:w-4 h-3 sm:h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
                         </a>
@@ -140,17 +142,18 @@ export default function Services() {
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            slidesPerView={3}
-            spaceBetween={30}
+            slidesPerView={1}
+            spaceBetween={0}
             autoplay={false}
             breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              320: { slidesPerView: 1, spaceBetween: 0 },
+              640: { slidesPerView: 1, spaceBetween: 0 },
+              768: { slidesPerView: 2, spaceBetween: 16 },
+              1024: { slidesPerView: 3, spaceBetween: 20 },
             }}
             navigation
             pagination={{ clickable: true }}
-            className="pb-12"
+            className="pb-12 sm:pb-14 md:pb-16 lg:pb-20"
           >
             {cards.map((service) => {
               const Icon = ICON_MAP[service.iconKey] || FaTint;
@@ -158,10 +161,27 @@ export default function Services() {
               const description = service.summary || service.description;
               const gradient = service.gradientClass || "from-blue-400 to-blue-600";
 
+              //  from now its not dynamic decause some issue are there thats preventing the service.gradientClass to work 
+              const GRADIENT_CSS_MAP = {
+                "from-blue-100 to-blue-300": "linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%)",
+                "from-indigo-100 to-purple-200": "linear-gradient(135deg, #e0e7ff 0%, #e9d5ff 100%)",
+                "from-green-100 to-teal-200": "linear-gradient(135deg, #d1fae5 0%, #99f6e4 100%)",
+                "from-red-100 to-orange-200": "linear-gradient(135deg, #fee2e2 0%, #fed7aa 100%)",
+                "from-teal-100 to-green-200": "linear-gradient(135deg, #ccfbf1 0%, #bbf7d0 100%)",
+                "from-cyan-100 to-blue-200": "linear-gradient(135deg, #cffafe 0%, #bfdbfe 100%)",
+                "from-purple-100 to-pink-200": "linear-gradient(135deg, #f3e8ff 0%, #fbcfe8 100%)",
+                "from-yellow-100 to-orange-200": "linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%)",
+                default: "linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%)",
+              };
+              arr3.add(gradient);
+              
+
+
               return (
                 <SwiperSlide key={key}>
                   <div
-                    className={`h-[600px] p-6 rounded-lg shadow-lg transition-all duration-300 relative overflow-hidden bg-gradient-to-br ${gradient} bg-opacity-100 card cursor-pointer`}
+                    className={`h-64 sm:h-80 md:h-96 lg:h-[600px] p-4 sm:p-6 md:p-5 lg:p-6 rounded-lg sm:rounded-lg md:rounded-lg lg:rounded-lg shadow-lg transition-all duration-300 relative overflow-hidden bg-opacity-100 card`}
+                    style={{ backgroundImage: GRADIENT_CSS_MAP[gradient] || GRADIENT_CSS_MAP.default }}
                     onClick={() => handleCardSelect(service)}
                     onKeyDown={(evt) => evt.key === "Enter" && handleCardSelect(service)}
                     role="button"
@@ -169,11 +189,11 @@ export default function Services() {
                     aria-label={`View details for ${service.title}`}
                   >
                     <div className="flex flex-col items-center text-center h-full justify-center">
-                      <div className="text-6xl mb-4 text-gray-900">
+                      <div className="text-5xl sm:text-6xl md:text-5xl lg:text-6xl mb-3 sm:mb-4 md:mb-4 lg:mb-4">
                         <Icon />
                       </div>
-                      <h2 className="text-2xl font-bold mb-2">{service.title}</h2>
-                      <p className="text-gray-700">{description}</p>
+                      <h2 className="text-base sm:text-lg md:text-lg lg:text-2xl font-bold mb-2 sm:mb-2 md:mb-2 lg:mb-2">{service.title}</h2>
+                      <p className="text-xs sm:text-sm md:text-sm lg:text-base text-gray-500">{description}</p>
                     </div>
                   </div>
                 </SwiperSlide>
