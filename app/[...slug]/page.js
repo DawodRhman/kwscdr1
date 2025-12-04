@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import prisma from "@/lib/prisma";
+import { getPageWithFallback } from "@/lib/page-cache";
 import PageRenderer from "@/components/PageBuilder/PageRenderer";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,16 +13,7 @@ async function getPage(slugArray) {
     return null;
   }
   const slug = slugArray.join("/");
-  const page = await prisma.page.findUnique({
-    where: { slug },
-    include: {
-      sections: {
-        orderBy: { order: "asc" },
-      },
-      seo: true,
-    },
-  });
-  return page;
+  return await getPageWithFallback(slug);
 }
 
 export async function generateMetadata({ params }) {

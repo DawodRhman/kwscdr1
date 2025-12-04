@@ -1,0 +1,48 @@
+{
+  "id": "7caa08ce-ea72-40c6-b614-4e92a374e0ec",
+  "slug": "ourservices",
+  "title": "Our Services",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:32:16.963Z",
+  "updatedAt": "2025-12-04T16:32:16.963Z",
+  "seoId": "5ce13474-5362-408e-9533-9dc2f1cb228b",
+  "sections": [
+    {
+      "id": "b156085a-d839-47f9-8f77-3ed26e541b39",
+      "pageId": "7caa08ce-ea72-40c6-b614-4e92a374e0ec",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "Our Services",
+        "subtitle": "What we offer to Karachi"
+      },
+      "createdAt": "2025-12-04T16:32:18.391Z",
+      "updatedAt": "2025-12-04T16:32:18.391Z"
+    },
+    {
+      "id": "86a0bbde-cf82-4948-b78f-b6f67b729ecc",
+      "pageId": "7caa08ce-ea72-40c6-b614-4e92a374e0ec",
+      "type": "SERVICES",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T16:32:18.391Z",
+      "updatedAt": "2025-12-04T16:32:18.391Z"
+    }
+  ],
+  "seo": {
+    "id": "5ce13474-5362-408e-9533-9dc2f1cb228b",
+    "title": "Our Services | KW&SC",
+    "description": "Learn more about Our Services at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:32:16.963Z",
+    "updatedAt": "2025-12-04T16:32:16.963Z"
+  }
+}

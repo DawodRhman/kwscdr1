@@ -1,0 +1,48 @@
+{
+  "id": "a3ea83ea-2775-4628-a7c6-637b8abe6a0c",
+  "slug": "whatwedo",
+  "title": "What We Do",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:32:27.751Z",
+  "updatedAt": "2025-12-04T16:32:27.751Z",
+  "seoId": "337cfd3e-9ff7-418a-a0a8-d8b3d606631f",
+  "sections": [
+    {
+      "id": "500c01e2-7653-40d0-8937-99776e7a7ebf",
+      "pageId": "a3ea83ea-2775-4628-a7c6-637b8abe6a0c",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "What We Do",
+        "subtitle": "Our core responsibilities"
+      },
+      "createdAt": "2025-12-04T16:32:29.151Z",
+      "updatedAt": "2025-12-04T16:32:29.151Z"
+    },
+    {
+      "id": "11eb8dca-d826-42b5-a5b1-33ac394ac79d",
+      "pageId": "a3ea83ea-2775-4628-a7c6-637b8abe6a0c",
+      "type": "WORKFLOW",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T16:32:29.151Z",
+      "updatedAt": "2025-12-04T16:32:29.151Z"
+    }
+  ],
+  "seo": {
+    "id": "337cfd3e-9ff7-418a-a0a8-d8b3d606631f",
+    "title": "What We Do | KW&SC",
+    "description": "Learn more about What We Do at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:32:27.751Z",
+    "updatedAt": "2025-12-04T16:32:27.751Z"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "links": [
+    {
+      "id": "94d8a4d4-f059-4c89-bb87-9b8331cb0493",
+      "title": "Facebook",
+      "platform": "facebook",
+      "url": "https://www.facebook.com/kwscofficial",
+      "order": 0,
+      "isActive": true,
+      "createdAt": "2025-12-04T16:40:48.301Z",
+      "updatedAt": "2025-12-04T16:40:48.301Z"
+    },
+    {
+      "id": "e67e6ae9-5275-4239-a196-90412b168f92",
+      "title": "Twitter",
+      "platform": "twitter",
+      "url": "https://twitter.com/kwscofficial",
+      "order": 1,
+      "isActive": true,
+      "createdAt": "2025-12-04T16:40:48.735Z",
+      "updatedAt": "2025-12-04T16:40:48.735Z"
+    },
+    {
+      "id": "86075670-11b1-4783-ae58-5f81af8d624b",
+      "title": "LinkedIn",
+      "platform": "linkedin",
+      "url": "https://www.linkedin.com/company/kwsc",
+      "order": 2,
+      "isActive": true,
+      "createdAt": "2025-12-04T16:40:48.953Z",
+      "updatedAt": "2025-12-04T16:40:48.953Z"
+    },
+    {
+      "id": "10f78886-34ff-4cf7-9d11-8306134e91e6",
+      "title": "YouTube",
+      "platform": "youtube",
+      "url": "https://www.youtube.com/@kwscofficial",
+      "order": 3,
+      "isActive": true,
+      "createdAt": "2025-12-04T16:40:49.175Z",
+      "updatedAt": "2025-12-04T16:40:49.175Z"
+    },
+    {
+      "id": "9f087c4b-99ba-4ecb-858c-03c94c01be40",
+      "title": "Instagram",
+      "platform": "instagram",
+      "url": "https://www.instagram.com/kwscofficial",
+      "order": 4,
+      "isActive": true,
+      "createdAt": "2025-12-04T16:40:49.392Z",
+      "updatedAt": "2025-12-04T16:40:49.392Z"
+    }
+  ]
+}

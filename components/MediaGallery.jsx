@@ -2,6 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronRight, Sun, Moon } from 'lucide-react';
 
+const FALLBACK_MEDIA = [
+    { name: "Water Treatment", title: "Hub Filtration Plant", imageUrl: "/bg-1.jpg" },
+    { name: "Infrastructure", title: "New Pipeline Project", imageUrl: "/bg-2.jpg" },
+    { name: "Community", title: "Awareness Campaign", imageUrl: "/bg-1.jpg" },
+    { name: "Operations", title: "Control Room", imageUrl: "/bg-2.jpg" },
+    { name: "Maintenance", title: "Sewerage Cleaning", imageUrl: "/bg-1.jpg" },
+];
+
 export default function MediaGallery({ items = [] }) {
     const [isDarkTheme, setIsDarkTheme] = useState(true);
 
@@ -52,7 +60,8 @@ export default function MediaGallery({ items = [] }) {
         return () => document.head.removeChild(style);
     }, []);
 
-    const displayItems = items.length > 0 ? [...items, ...items] : [];
+    const sourceItems = items.length > 0 ? items : FALLBACK_MEDIA;
+    const displayItems = [...sourceItems, ...sourceItems];
 
     return (
         <section className={`${t.mainBg} py-8 sm:py-12 md:py-20 lg:py-28 xl:py-32 relative overflow-hidden transition-colors duration-500`}>

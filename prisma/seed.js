@@ -15,20 +15,80 @@ const content = require("../data/static/content");
 const prisma = new PrismaClient();
 const PUBLIC_DIR = path.join(__dirname, "..", "public");
 let mediaMetadataHelperPromise;
-let roleCatalogModulePromise;
+
+const ROLE_CATALOG = [
+  {
+    type: "ADMIN",
+    label: "Administrator",
+    description: "Full control across every module, operators, and audit logs.",
+    permissions: [
+      "services:write",
+      "tenders:write",
+      "careers:write",
+      "news:write",
+      "projects:write",
+      "leadership:write",
+      "settings:write",
+      "media:write",
+      "users:write",
+      "audit:read",
+      "faq:write",
+      "education:write",
+      "watertoday:write",
+      "rti:write",
+      "pages:read",
+      "pages:write",
+    ],
+  },
+  {
+    type: "EDITOR",
+    label: "Content Editor",
+    description: "Manages core content such as services, news, leadership, and projects.",
+    permissions: [
+      "services:write",
+      "careers:write",
+      "news:write",
+      "projects:write",
+      "leadership:write",
+      "faq:write",
+      "education:write",
+      "watertoday:write",
+      "rti:write",
+      "pages:read",
+      "pages:write",
+    ],
+  },
+  {
+    type: "MEDIA_MANAGER",
+    label: "Media Manager",
+    description: "Handles uploads, asset metadata, and connected channels.",
+    permissions: ["media:write", "settings:write"],
+  },
+  {
+    type: "PROCUREMENT",
+    label: "Procurement",
+    description: "Owns tenders and procurement status updates.",
+    permissions: ["tenders:write"],
+  },
+  {
+    type: "HR",
+    label: "Human Resources",
+    description: "Maintains careers module and operator onboarding context.",
+    permissions: ["careers:write"],
+  },
+  {
+    type: "AUDITOR",
+    label: "Auditor",
+    description: "Read-only visibility into immutable audit trail entries.",
+    permissions: ["audit:read"],
+  },
+];
 
 function loadMediaMetadataHelper() {
   if (!mediaMetadataHelperPromise) {
     mediaMetadataHelperPromise = import("../shared/media-metadata.js");
   }
   return mediaMetadataHelperPromise;
-}
-
-function loadRoleCatalog() {
-  if (!roleCatalogModulePromise) {
-    roleCatalogModulePromise = import("../lib/auth/roleCatalog.js");
-  }
-  return roleCatalogModulePromise;
 }
 
 function isLocalAsset(url) {
@@ -145,7 +205,7 @@ async function resetTables() {
 }
 
 async function seedAuth() {
-  const { ROLE_CATALOG } = await loadRoleCatalog();
+  // const { ROLE_CATALOG } = await loadRoleCatalog();
   const roles = ROLE_CATALOG.map((role) => {
     const enumValue = RoleType[role.type];
     if (!enumValue) {
@@ -762,7 +822,7 @@ async function seedPages() {
       slug: "careers",
       sections: [
         { type: "HERO", order: 0, content: { title: "Join Our Team", subtitle: "Build your career with us" } },
-        { type: "TEXT_BLOCK", order: 1, content: { heading: "Why Work With Us?", body: "<p>We offer a dynamic work environment...</p>" } }
+        { type: "CAREERS", order: 1, content: {} }
       ]
     },
     {
@@ -794,7 +854,7 @@ async function seedPages() {
       slug: "news",
       sections: [
         { type: "HERO", order: 0, content: { title: "News Room", subtitle: "Latest updates from KW&SC" } },
-        { type: "MEDIA_GALLERY", order: 1, content: {} }
+        { type: "NEWS", order: 1, content: {} }
       ]
     },
     {
@@ -834,7 +894,7 @@ async function seedPages() {
       slug: "tenders",
       sections: [
         { type: "HERO", order: 0, content: { title: "Tenders", subtitle: "Procurement opportunities" } },
-        { type: "TEXT_BLOCK", order: 1, content: { heading: "Active Tenders", body: "<p>List of active tenders...</p>" } }
+        { type: "TENDERS", order: 1, content: {} }
       ]
     },
     {
@@ -850,7 +910,7 @@ async function seedPages() {
       slug: "whatwedo",
       sections: [
         { type: "HERO", order: 0, content: { title: "What We Do", subtitle: "Our core responsibilities" } },
-        { type: "TEXT_BLOCK", order: 1, content: { heading: "Overview", body: "<p>We manage water and sewerage...</p>" } }
+        { type: "WORKFLOW", order: 1, content: {} }
       ]
     },
     {
@@ -858,7 +918,7 @@ async function seedPages() {
       slug: "workwithus",
       sections: [
         { type: "HERO", order: 0, content: { title: "Work With Us", subtitle: "Partner with KW&SC" } },
-        { type: "TEXT_BLOCK", order: 1, content: { heading: "Opportunities", body: "<p>Contractor registration...</p>" } }
+        { type: "CAREERS", order: 1, content: {} }
       ]
     }
   ];

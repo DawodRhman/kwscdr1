@@ -1,7 +1,27 @@
 import React from "react";
 import OptimizedImage from "@/components/OptimizedImage";
 
+const FALLBACK_CARDS = [
+  {
+    title: "Excellence in Service",
+    body: "Recognized for outstanding performance in water distribution and management across Karachi.",
+    imageUrl: "/bg-1.jpg"
+  },
+  {
+    title: "Innovation Award",
+    body: "Awarded for implementing cutting-edge technology in sewerage treatment and disposal.",
+    imageUrl: "/bg-2.jpg"
+  },
+  {
+    title: "Community Impact",
+    body: "Acknowledged for significant contributions to community health and hygiene awareness.",
+    imageUrl: "/bg-1.jpg"
+  }
+];
+
 const GenericCardGrid = ({ heading, description, cards = [] }) => {
+  const displayCards = cards.length > 0 ? cards : FALLBACK_CARDS;
+
   return (
     <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
       {(heading || description) && (
@@ -20,7 +40,7 @@ const GenericCardGrid = ({ heading, description, cards = [] }) => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {cards.map((card, index) => (
+        {displayCards.map((card, index) => (
           <div 
             key={index} 
             className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100"

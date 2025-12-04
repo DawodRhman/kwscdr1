@@ -7,6 +7,10 @@ import Faqs from "@/components/Faqs";
 import MediaGallery from "@/components/MediaGallery";
 import Subscribe from "@/components/Subscribe";
 import GenericCardGrid from "./GenericCardGrid";
+import Career from "@/components/Career";
+import Tenders from "@/components/Tenders";
+import WorkFlow from "@/components/Workflow";
+import NewsUpdate from "@/components/NewsUpdate";
 
 // A simple generic text block component
 const TextBlock = ({ heading, body }) => {
@@ -37,6 +41,10 @@ const COMPONENT_MAP = {
   MEDIA_GALLERY: MediaGallery,
   SUBSCRIBE: Subscribe,
   CARD_GRID: GenericCardGrid,
+  CAREERS: Career,
+  TENDERS: Tenders,
+  WORKFLOW: WorkFlow,
+  NEWS: NewsUpdate,
 };
 
 export default function PageRenderer({ sections }) {

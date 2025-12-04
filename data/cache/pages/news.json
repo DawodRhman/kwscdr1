@@ -1,0 +1,48 @@
+{
+  "id": "ecbd15cb-795c-43b0-bea8-f1c26a0dd344",
+  "slug": "news",
+  "title": "News & Updates",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:41:11.058Z",
+  "updatedAt": "2025-12-04T16:41:11.058Z",
+  "seoId": "ea0cddb4-c85d-45e1-8408-a4db617e62c2",
+  "sections": [
+    {
+      "id": "22b637bf-75d4-4a41-9b41-44e743adc941",
+      "pageId": "ecbd15cb-795c-43b0-bea8-f1c26a0dd344",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "News Room",
+        "subtitle": "Latest updates from KW&SC"
+      },
+      "createdAt": "2025-12-04T16:41:12.806Z",
+      "updatedAt": "2025-12-04T16:41:12.806Z"
+    },
+    {
+      "id": "71e73dc9-de1a-474f-8dc2-2339cbd82388",
+      "pageId": "ecbd15cb-795c-43b0-bea8-f1c26a0dd344",
+      "type": "NEWS",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T16:41:12.806Z",
+      "updatedAt": "2025-12-04T16:41:12.806Z"
+    }
+  ],
+  "seo": {
+    "id": "ea0cddb4-c85d-45e1-8408-a4db617e62c2",
+    "title": "News & Updates | KW&SC",
+    "description": "Learn more about News & Updates at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:41:11.058Z",
+    "updatedAt": "2025-12-04T16:41:11.058Z"
+  }
+}

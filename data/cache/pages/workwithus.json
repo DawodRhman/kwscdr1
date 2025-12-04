@@ -1,0 +1,51 @@
+{
+  "id": "e6ebfdc8-9fc0-4703-a204-3e5bb06b10cf",
+  "slug": "workwithus",
+  "title": "Work With Us",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:32:29.757Z",
+  "updatedAt": "2025-12-04T16:32:29.757Z",
+  "seoId": "74dd6f25-a9f4-4e64-9276-e5781ebfeaf6",
+  "sections": [
+    {
+      "id": "be21a33a-4280-4b5c-9295-82d8e1bec954",
+      "pageId": "e6ebfdc8-9fc0-4703-a204-3e5bb06b10cf",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "Work With Us",
+        "subtitle": "Partner with KW&SC"
+      },
+      "createdAt": "2025-12-04T16:32:31.152Z",
+      "updatedAt": "2025-12-04T16:32:31.152Z"
+    },
+    {
+      "id": "f92270bf-d513-4174-b5ed-a1e71962c04d",
+      "pageId": "e6ebfdc8-9fc0-4703-a204-3e5bb06b10cf",
+      "type": "TEXT_BLOCK",
+      "order": 1,
+      "content": {
+        "body": "<p>Contractor registration...</p>",
+        "heading": "Opportunities"
+      },
+      "createdAt": "2025-12-04T16:32:31.152Z",
+      "updatedAt": "2025-12-04T16:32:31.152Z"
+    }
+  ],
+  "seo": {
+    "id": "74dd6f25-a9f4-4e64-9276-e5781ebfeaf6",
+    "title": "Work With Us | KW&SC",
+    "description": "Learn more about Work With Us at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:32:29.757Z",
+    "updatedAt": "2025-12-04T16:32:29.757Z"
+  }
+}

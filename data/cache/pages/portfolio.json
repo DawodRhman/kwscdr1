@@ -1,0 +1,48 @@
+{
+  "id": "a1ff54d1-5cf5-47be-9e6c-d8679a80f8ee",
+  "slug": "portfolio",
+  "title": "Our Projects",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:05:17.371Z",
+  "updatedAt": "2025-12-04T16:05:17.371Z",
+  "seoId": "3fd08ac7-25a5-4acf-a6b6-57368f557e94",
+  "sections": [
+    {
+      "id": "b535f4ae-f5eb-46af-bb67-92c71f6019be",
+      "pageId": "a1ff54d1-5cf5-47be-9e6c-d8679a80f8ee",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "Our Projects",
+        "subtitle": "Building a better future"
+      },
+      "createdAt": "2025-12-04T16:05:19.643Z",
+      "updatedAt": "2025-12-04T16:05:19.643Z"
+    },
+    {
+      "id": "83ae1cce-030e-4331-be39-98eb33a19c22",
+      "pageId": "a1ff54d1-5cf5-47be-9e6c-d8679a80f8ee",
+      "type": "PROJECTS",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T16:05:19.643Z",
+      "updatedAt": "2025-12-04T16:05:19.643Z"
+    }
+  ],
+  "seo": {
+    "id": "3fd08ac7-25a5-4acf-a6b6-57368f557e94",
+    "title": "Our Projects | KW&SC",
+    "description": "Learn more about Our Projects at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:05:17.371Z",
+    "updatedAt": "2025-12-04T16:05:17.371Z"
+  }
+}

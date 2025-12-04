@@ -1,0 +1,419 @@
+{
+  "hero": {
+    "title": "Careers at KW&SC",
+    "subtitle": "Join our mission to provide clean water and efficient sewerage services to Karachi.",
+    "backgroundImage": "/teentalwarkarachi.gif"
+  },
+  "programs": [
+    {
+      "id": "51211900-a4c7-4f26-878a-b44d5dbeb135",
+      "title": "Recruitment",
+      "slug": "recruitment",
+      "heroTitle": "Recruitment",
+      "heroBody": "Join KW&SC's team of dedicated professionals working to improve Karachi's essential water and sewerage infrastructure.",
+      "eligibility": [
+        "Competitive salary packages",
+        "Professional development opportunities",
+        "Health insurance benefits",
+        "Pension scheme",
+        "Career growth prospects"
+      ],
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:17.790Z",
+      "updatedAt": "2025-12-04T16:31:17.790Z",
+      "seo": null
+    },
+    {
+      "id": "d15ea1ec-abca-4bf9-b9fb-8767e4b28b75",
+      "title": "Young Graduate Program",
+      "slug": "young-graduate-program",
+      "heroTitle": "Young Graduate Program",
+      "heroBody": "Launch your career with KW&SC's comprehensive graduate program designed for fresh, talented engineers and professionals.",
+      "eligibility": [
+        "A structured program",
+        "Mentorship from senior professionals",
+        "Hands-on project experience",
+        "Training and skill development",
+        "Potential for permanent employment"
+      ],
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:18.197Z",
+      "updatedAt": "2025-12-04T16:31:18.197Z",
+      "seo": null
+    },
+    {
+      "id": "e816a5fc-a588-4087-a19f-a367f7a289d7",
+      "title": "Consultancies",
+      "slug": "consultancies",
+      "heroTitle": "Consultancies",
+      "heroBody": "Partner with KW&SC as an expert consultant to contribute your specialized skills to critical infrastructure projects.",
+      "eligibility": [
+        "Project-based assignments",
+        "Flexible working arrangements",
+        "Competitive consultancy rates",
+        "Access to latest technology",
+        "Collaboration with industry experts"
+      ],
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:18.424Z",
+      "updatedAt": "2025-12-04T16:31:18.424Z",
+      "seo": null
+    }
+  ],
+  "openings": [
+    {
+      "id": "dc1bb985-7f94-4f3c-968f-64ad2e931593",
+      "programId": null,
+      "title": "Graduate Trainee",
+      "slug": "graduate-trainee-karachi-3",
+      "department": "Various Departments",
+      "location": "Karachi",
+      "jobType": "Training Program",
+      "compensation": null,
+      "status": "PUBLISHED",
+      "publishAt": "2025-12-04T16:31:25.678Z",
+      "expireAt": null,
+      "applyUrl": null,
+      "applyEmail": null,
+      "summary": "Graduate Trainee role at Various Departments",
+      "description": null,
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:25.680Z",
+      "updatedAt": "2025-12-04T16:31:25.680Z",
+      "requirements": [
+        {
+          "id": "f2ec9142-0ab0-4878-95b2-af946313f75b",
+          "careerOpeningId": "dc1bb985-7f94-4f3c-968f-64ad2e931593",
+          "type": "QUALIFICATION",
+          "content": "Fresh Graduate",
+          "order": 0
+        },
+        {
+          "id": "dcca67f7-4e01-432d-9f49-7c2c1322831f",
+          "careerOpeningId": "dc1bb985-7f94-4f3c-968f-64ad2e931593",
+          "type": "RESPONSIBILITY",
+          "content": "Deliver on KW&SC service excellence commitments.",
+          "order": 0
+        }
+      ],
+      "seo": null,
+      "qualifications": [
+        "Fresh Graduate"
+      ],
+      "responsibilities": [
+        "Deliver on KW&SC service excellence commitments."
+      ]
+    },
+    {
+      "id": "9eff5115-f6a8-4057-a84b-37570905f9c0",
+      "programId": null,
+      "title": "Assistant Engineer",
+      "slug": "assistant-engineer-karachi-2",
+      "department": "Technical Services",
+      "location": "Karachi",
+      "jobType": "Full-time",
+      "compensation": null,
+      "status": "PUBLISHED",
+      "publishAt": "2025-12-04T16:31:24.661Z",
+      "expireAt": null,
+      "applyUrl": null,
+      "applyEmail": null,
+      "summary": "Assistant Engineer role at Technical Services",
+      "description": null,
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:24.663Z",
+      "updatedAt": "2025-12-04T16:31:24.663Z",
+      "requirements": [
+        {
+          "id": "5dc7d9d3-ce6a-4457-ba81-6480c4098908",
+          "careerOpeningId": "9eff5115-f6a8-4057-a84b-37570905f9c0",
+          "type": "QUALIFICATION",
+          "content": "2+ years",
+          "order": 0
+        },
+        {
+          "id": "6aeca8ba-6e79-401b-a363-77feb67c4665",
+          "careerOpeningId": "9eff5115-f6a8-4057-a84b-37570905f9c0",
+          "type": "RESPONSIBILITY",
+          "content": "Deliver on KW&SC service excellence commitments.",
+          "order": 0
+        }
+      ],
+      "seo": null,
+      "qualifications": [
+        "2+ years"
+      ],
+      "responsibilities": [
+        "Deliver on KW&SC service excellence commitments."
+      ]
+    },
+    {
+      "id": "15140719-e897-4f62-9090-19d3d2ce9bb9",
+      "programId": null,
+      "title": "Executive Engineer (Sewerage)",
+      "slug": "executive-engineer-sewerage-karachi-1",
+      "department": "Sewerage Department",
+      "location": "Karachi",
+      "jobType": "Full-time",
+      "compensation": null,
+      "status": "PUBLISHED",
+      "publishAt": "2025-12-04T16:31:23.652Z",
+      "expireAt": null,
+      "applyUrl": null,
+      "applyEmail": null,
+      "summary": "Executive Engineer (Sewerage) role at Sewerage Department",
+      "description": null,
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:23.655Z",
+      "updatedAt": "2025-12-04T16:31:23.655Z",
+      "requirements": [
+        {
+          "id": "952b1eef-e4a3-4deb-ab50-39e68599a63b",
+          "careerOpeningId": "15140719-e897-4f62-9090-19d3d2ce9bb9",
+          "type": "QUALIFICATION",
+          "content": "5+ years",
+          "order": 0
+        },
+        {
+          "id": "bd742896-afba-462d-b934-dda378d2887d",
+          "careerOpeningId": "15140719-e897-4f62-9090-19d3d2ce9bb9",
+          "type": "RESPONSIBILITY",
+          "content": "Deliver on KW&SC service excellence commitments.",
+          "order": 0
+        }
+      ],
+      "seo": null,
+      "qualifications": [
+        "5+ years"
+      ],
+      "responsibilities": [
+        "Deliver on KW&SC service excellence commitments."
+      ]
+    },
+    {
+      "id": "629cfd73-b07d-4c6a-aae2-847dfa02cafc",
+      "programId": null,
+      "title": "Executive Engineer (Water)",
+      "slug": "executive-engineer-water-karachi-0",
+      "department": "Water Supply Department",
+      "location": "Karachi",
+      "jobType": "Full-time",
+      "compensation": null,
+      "status": "PUBLISHED",
+      "publishAt": "2025-12-04T16:31:22.053Z",
+      "expireAt": null,
+      "applyUrl": null,
+      "applyEmail": null,
+      "summary": "Executive Engineer (Water) role at Water Supply Department",
+      "description": null,
+      "seoId": null,
+      "createdAt": "2025-12-04T16:31:22.055Z",
+      "updatedAt": "2025-12-04T16:31:22.055Z",
+      "requirements": [
+        {
+          "id": "58d999ec-d322-42fa-b8c6-10a13973301f",
+          "careerOpeningId": "629cfd73-b07d-4c6a-aae2-847dfa02cafc",
+          "type": "QUALIFICATION",
+          "content": "5+ years",
+          "order": 0
+        },
+        {
+          "id": "9ff995a2-0442-4acf-b8af-66d4070a8c58",
+          "careerOpeningId": "629cfd73-b07d-4c6a-aae2-847dfa02cafc",
+          "type": "RESPONSIBILITY",
+          "content": "Deliver on KW&SC service excellence commitments.",
+          "order": 0
+        }
+      ],
+      "seo": null,
+      "qualifications": [
+        "5+ years"
+      ],
+      "responsibilities": [
+        "Deliver on KW&SC service excellence commitments."
+      ]
+    }
+  ],
+  "benefits": [
+    {
+      "id": "8de9e3b8-6ae9-43e9-8f80-88eabb53a7b2",
+      "title": "Competitive salary packages",
+      "summary": null,
+      "iconKey": null,
+      "order": 0,
+      "createdAt": "2025-12-04T16:31:18.625Z",
+      "updatedAt": "2025-12-04T16:31:18.625Z"
+    },
+    {
+      "id": "a1385141-dfe0-477f-bae7-da7ad4a0f34e",
+      "title": "Professional development opportunities",
+      "summary": null,
+      "iconKey": null,
+      "order": 1,
+      "createdAt": "2025-12-04T16:31:19.025Z",
+      "updatedAt": "2025-12-04T16:31:19.025Z"
+    },
+    {
+      "id": "c0141134-70ba-4613-a9e6-03b5b9cb569b",
+      "title": "Health insurance benefits",
+      "summary": null,
+      "iconKey": null,
+      "order": 2,
+      "createdAt": "2025-12-04T16:31:19.225Z",
+      "updatedAt": "2025-12-04T16:31:19.225Z"
+    },
+    {
+      "id": "b1616ca6-cd11-4f0e-9ae4-7dc1e521b3af",
+      "title": "Pension scheme",
+      "summary": null,
+      "iconKey": null,
+      "order": 3,
+      "createdAt": "2025-12-04T16:31:19.426Z",
+      "updatedAt": "2025-12-04T16:31:19.426Z"
+    },
+    {
+      "id": "8f32334b-19dd-4811-9e7c-e34201737f37",
+      "title": "Career growth prospects",
+      "summary": null,
+      "iconKey": null,
+      "order": 4,
+      "createdAt": "2025-12-04T16:31:19.630Z",
+      "updatedAt": "2025-12-04T16:31:19.630Z"
+    },
+    {
+      "id": "87d09b12-665e-4ed1-8bf1-ae79d58981e3",
+      "title": "A structured program",
+      "summary": null,
+      "iconKey": null,
+      "order": 5,
+      "createdAt": "2025-12-04T16:31:19.833Z",
+      "updatedAt": "2025-12-04T16:31:19.833Z"
+    },
+    {
+      "id": "7d227547-018f-4f6a-8d53-a15df4cb0e16",
+      "title": "Mentorship from senior professionals",
+      "summary": null,
+      "iconKey": null,
+      "order": 6,
+      "createdAt": "2025-12-04T16:31:20.039Z",
+      "updatedAt": "2025-12-04T16:31:20.039Z"
+    },
+    {
+      "id": "435f4309-b91c-4b4e-9b76-bd0324c2d19b",
+      "title": "Hands-on project experience",
+      "summary": null,
+      "iconKey": null,
+      "order": 7,
+      "createdAt": "2025-12-04T16:31:20.440Z",
+      "updatedAt": "2025-12-04T16:31:20.440Z"
+    },
+    {
+      "id": "9061f5f4-31c6-49eb-ac23-1cacfb384295",
+      "title": "Training and skill development",
+      "summary": null,
+      "iconKey": null,
+      "order": 8,
+      "createdAt": "2025-12-04T16:31:20.640Z",
+      "updatedAt": "2025-12-04T16:31:20.640Z"
+    },
+    {
+      "id": "3f503314-7e87-4ba7-89fb-b56c572e2a85",
+      "title": "Potential for permanent employment",
+      "summary": null,
+      "iconKey": null,
+      "order": 9,
+      "createdAt": "2025-12-04T16:31:20.842Z",
+      "updatedAt": "2025-12-04T16:31:20.842Z"
+    },
+    {
+      "id": "16888022-0c13-4e6b-977d-07b1f0249fba",
+      "title": "Project-based assignments",
+      "summary": null,
+      "iconKey": null,
+      "order": 10,
+      "createdAt": "2025-12-04T16:31:21.048Z",
+      "updatedAt": "2025-12-04T16:31:21.048Z"
+    },
+    {
+      "id": "b52ed0d9-0ea1-47b7-a1f9-e5913c8edbce",
+      "title": "Flexible working arrangements",
+      "summary": null,
+      "iconKey": null,
+      "order": 11,
+      "createdAt": "2025-12-04T16:31:21.254Z",
+      "updatedAt": "2025-12-04T16:31:21.254Z"
+    },
+    {
+      "id": "74296b9a-32aa-462b-9f02-5d83bf2c0222",
+      "title": "Competitive consultancy rates",
+      "summary": null,
+      "iconKey": null,
+      "order": 12,
+      "createdAt": "2025-12-04T16:31:21.456Z",
+      "updatedAt": "2025-12-04T16:31:21.456Z"
+    },
+    {
+      "id": "76b8dbc6-9a26-4cea-af11-ce6641507c92",
+      "title": "Access to latest technology",
+      "summary": null,
+      "iconKey": null,
+      "order": 13,
+      "createdAt": "2025-12-04T16:31:21.655Z",
+      "updatedAt": "2025-12-04T16:31:21.655Z"
+    },
+    {
+      "id": "c6843489-c350-4849-81c8-65d3f1047c39",
+      "title": "Collaboration with industry experts",
+      "summary": null,
+      "iconKey": null,
+      "order": 14,
+      "createdAt": "2025-12-04T16:31:21.855Z",
+      "updatedAt": "2025-12-04T16:31:21.855Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "2a8ca50f-cf62-4d68-b6d2-14897bd4584c",
+      "label": "KW&SC Helpline",
+      "email": null,
+      "phone": "(+92) 021 111 597 200",
+      "description": "24/7 customer facilitation center",
+      "availability": "24/7",
+      "createdAt": "2025-12-04T16:31:26.685Z",
+      "updatedAt": "2025-12-04T16:31:26.685Z"
+    },
+    {
+      "id": "3d782b6a-6a96-4cb8-83ef-4cbcd2b4aa2a",
+      "label": "Central Correspondence Cell",
+      "email": "info@kwsc.gos.pk",
+      "phone": null,
+      "description": "General inquiries and escalations",
+      "availability": "Mon–Fri · 9am – 5pm",
+      "createdAt": "2025-12-04T16:31:27.088Z",
+      "updatedAt": "2025-12-04T16:31:27.088Z"
+    },
+    {
+      "id": "48fb16c3-cb15-4454-b180-b01dd051e3d8",
+      "label": "Hydrant & Tanker Management",
+      "email": "hydrant.cell@kwsc.gos.pk",
+      "phone": "(+92) 021 992 45157",
+      "description": "Bulk water booking and tanker dispatch",
+      "availability": "Daily · 8am – 10pm",
+      "createdAt": "2025-12-04T16:31:27.293Z",
+      "updatedAt": "2025-12-04T16:31:27.293Z"
+    }
+  ],
+  "seo": {
+    "id": null,
+    "title": "Careers at KW&SC | Karachi Water & Sewerage Corporation",
+    "description": "Join our mission to provide clean water and efficient sewerage services to Karachi.",
+    "keywords": null,
+    "canonicalUrl": "/careers",
+    "ogTitle": "Careers at KW&SC | Karachi Water & Sewerage Corporation",
+    "ogDescription": "Join our mission to provide clean water and efficient sewerage services to Karachi.",
+    "ogImageUrl": "/teentalwarkarachi.gif",
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true
+  }
+}

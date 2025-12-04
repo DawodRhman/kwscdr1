@@ -80,12 +80,21 @@ const Navbar = () => {
   // ✅ Track scroll position for background switch
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80); // Change background after 50px scroll
+      // If not on home page, always treat as scrolled (solid background)
+      // OR if on home page, check scroll position
+      if (pathname !== "/") {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(window.scrollY > 80);
+      }
     };
+
+    // Run immediately to set initial state
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const [dynamicPages, setDynamicPages] = useState([]);
 
@@ -110,40 +119,51 @@ const Navbar = () => {
     { slug: "home", href: "/", text: "Home", alwaysShow: true },
     { 
       slug: "whatwedo", 
-      submenu: ["ourservices", "portfolio", "workwithus", "news", "right-to-information"]
+      text: "What We Do",
+      submenu: [
+        { slug: "ourservices", text: "Our Services" },
+        { slug: "portfolio", text: "Our Projects" },
+        { slug: "workwithus", text: "Work With Us" },
+        { slug: "news", text: "News & Updates" },
+        { slug: "right-to-information", text: "Right to Information" }
+      ]
     },
     {
       slug: "aboutus",
+      text: "About Us",
       submenu: [
         { slug: "aboutus", text: "Our Heritage" },
-        "watertodaysection", "achievements", "ourleadership", "careers", "faqs"
+        { slug: "watertodaysection", text: "Water Today" },
+        { slug: "achievements", text: "Achievements" },
+        { slug: "ourleadership", text: "Our Leadership" },
+        { slug: "careers", text: "Careers" },
+        { slug: "faqs", text: "FAQs" }
       ]
     },
-    { slug: "tenders" },
-    { slug: "education" },
-    { slug: "contact" }
+    { slug: "tenders", text: "Tenders" },
+    { slug: "education", text: "Education" },
+    { slug: "contact", text: "Contact" }
   ];
 
   const NavLinks = [
     ...menuSkeleton.map(item => {
       const page = getPageData(item.slug);
-      // Show if it's "alwaysShow" OR (page exists AND showInNavbar is true)
-      // For hardcoded items that might not be in DB yet (unlikely now), default to true?
-      // Since we seeded everything, page should exist.
-      const isVisible = item.alwaysShow || (page && page.showInNavbar);
+      // Always show skeleton items regardless of DB status to ensure navigation structure
+      const isVisible = true;
       
       if (!isVisible) return null;
 
       const link = {
         href: item.href || `/${item.slug}`,
-        text: page?.title || item.text || item.slug,
+        text: item.text || page?.title || item.slug,
       };
 
       if (item.submenu) {
         link.submenu = item.submenu.map(sub => {
           const subSlug = typeof sub === 'string' ? sub : sub.slug;
           const subPage = getPageData(subSlug);
-          const subVisible = subPage && subPage.showInNavbar;
+          // Always show skeleton submenu items
+          const subVisible = true;
           
           if (!subVisible) return null;
 

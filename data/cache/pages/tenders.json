@@ -1,0 +1,48 @@
+{
+  "id": "9676a75b-54a0-474c-ba64-8e616846c57f",
+  "slug": "tenders",
+  "title": "Tenders",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T16:32:23.421Z",
+  "updatedAt": "2025-12-04T16:32:23.421Z",
+  "seoId": "6ed5491a-d9d2-4b85-9eec-f784ef425c3d",
+  "sections": [
+    {
+      "id": "0c7de103-85fb-491e-822d-561c281d11bb",
+      "pageId": "9676a75b-54a0-474c-ba64-8e616846c57f",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "Tenders",
+        "subtitle": "Procurement opportunities"
+      },
+      "createdAt": "2025-12-04T16:32:24.944Z",
+      "updatedAt": "2025-12-04T16:32:24.944Z"
+    },
+    {
+      "id": "7e13284e-a29e-4078-a98c-38e124da8244",
+      "pageId": "9676a75b-54a0-474c-ba64-8e616846c57f",
+      "type": "TENDERS",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T16:32:24.944Z",
+      "updatedAt": "2025-12-04T16:32:24.944Z"
+    }
+  ],
+  "seo": {
+    "id": "6ed5491a-d9d2-4b85-9eec-f784ef425c3d",
+    "title": "Tenders | KW&SC",
+    "description": "Learn more about Tenders at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T16:32:23.421Z",
+    "updatedAt": "2025-12-04T16:32:23.421Z"
+  }
+}

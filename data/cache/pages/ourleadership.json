@@ -1,0 +1,48 @@
+{
+  "id": "4b6c52db-393f-4d1c-a3bf-f304420359cd",
+  "slug": "ourleadership",
+  "title": "Our Leadership",
+  "isPublished": true,
+  "showInNavbar": false,
+  "createdAt": "2025-12-04T15:36:44.125Z",
+  "updatedAt": "2025-12-04T15:36:44.125Z",
+  "seoId": "db3b90d6-7ef9-46d7-b52e-d0beb4dbfe93",
+  "sections": [
+    {
+      "id": "075ab22a-14f5-4566-8aa2-a0ececd273ca",
+      "pageId": "4b6c52db-393f-4d1c-a3bf-f304420359cd",
+      "type": "HERO",
+      "order": 0,
+      "content": {
+        "title": "Our Leadership",
+        "subtitle": "Meet the team guiding us"
+      },
+      "createdAt": "2025-12-04T15:36:45.550Z",
+      "updatedAt": "2025-12-04T15:36:45.550Z"
+    },
+    {
+      "id": "58dfed8f-1013-44ea-98ff-c1ab7dd1ce77",
+      "pageId": "4b6c52db-393f-4d1c-a3bf-f304420359cd",
+      "type": "LEADERSHIP",
+      "order": 1,
+      "content": {},
+      "createdAt": "2025-12-04T15:36:45.550Z",
+      "updatedAt": "2025-12-04T15:36:45.550Z"
+    }
+  ],
+  "seo": {
+    "id": "db3b90d6-7ef9-46d7-b52e-d0beb4dbfe93",
+    "title": "Our Leadership | KW&SC",
+    "description": "Learn more about Our Leadership at Karachi Water & Sewerage Corporation.",
+    "keywords": null,
+    "canonicalUrl": null,
+    "ogTitle": null,
+    "ogDescription": null,
+    "ogImageUrl": null,
+    "twitterCard": "summary_large_image",
+    "structuredData": null,
+    "allowIndexing": true,
+    "createdAt": "2025-12-04T15:36:44.125Z",
+    "updatedAt": "2025-12-04T15:36:44.125Z"
+  }
+}
